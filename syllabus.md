@@ -15,7 +15,7 @@ permalink: /syllabus/
 **Office Hours:**
   * Prof. Guo: Fridays, 10-11AM in Fuller 138. Or by appointment. 
   * Hamid (TA): Mondays, 4-6PM, Thursdays, ~~3-5PM~~, __5:30-7:30pm__,  Fuller Zoo Lab 
-  * Mario (SA): Tuesdays, 4-6PM, Wednesdays, 5-7PM, Fuller Zoo Lab 
+  * Mario (SA): Tuesdays, 4-6PM, Wednesdays, ~~5-7PM~~, __6-8PM__, Fuller Zoo Lab 
   
   
 ### Course Description 
