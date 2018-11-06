@@ -1,0 +1,248 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>CS4518 How-to: Create My APP with colors and navigation drawers - By Alexandra Wheeler</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="CS4518 How-to: Create My APP with colors and navigation drawers - By Alexandra Wheeler"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Overview of Tutorial" duration="0">
+        <p>This tutorial will show you how to create an application with multiple activities through a navigation drawer. It also demonstrates the use of colors, input, and scroll view.</p>
+<p>Prerequisites:</p>
+<ul>
+<li>Android Studio 3.2</li>
+<li>Android physical or virtual devices API 27</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Make sure the code from part 1 is complete" duration="0">
+        <p>After you finished your project code, and make sure that your app behaves as expected. You should have a button that changes the image randomly.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Colors" duration="0">
+        <p>Go to colors.xml (red -&gt; values -&gt; colors.xml)<br><img alt="How to find colors" src="img/36e7c0fa8c008001.png"><br>You can change the colors for the project and add new color definitions here. These colors are in hex values and can be used anywhere.</p>
+<p>Such as:</p>
+<pre><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+&lt;resources&gt;
+    &lt;color name=&#34;colorPrimary&#34;&gt;#A288E3&lt;/color&gt;
+    &lt;color name=&#34;colorPrimaryDark&#34;&gt;#38023B&lt;/color&gt;
+    &lt;color name=&#34;colorAccent&#34;&gt;#CCFFCB&lt;/color&gt;
+    &lt;color name=&#34;black&#34;&gt;#000&lt;/color&gt;
+&lt;/resources&gt;
+
+</code></pre>
+<p>Modify the colors for the application.</p>
+<p>To change the background color of the application go to the layout file and type</p>
+<pre><code>android:background=&#34;#BBD5ED&#34;
+</code></pre>
+<p>under the constraint layout. Change the hex value to what color you want it to be.</p>
+<p>Now go see how colorful your drawing is.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add a Navigation Drawer" duration="0">
+        <p>To add a Navigation Drawer, go to File-&gt;New-&gt;New Project</p>
+<p>Change the name as you want and Select Navigation Drawer Activity<br><img alt="Create Nav Drawer" src="img/4027bb4e8b53f834.png"></p>
+<p>There are several layouts in the layout folder. The first is activity_main.xml. This is how the page looks with the nav drawer out. We&#39;re not going to mess with this one.<br><img alt="Activity_main" src="img/2e835cb4c7e2bd99.png"></p>
+<p>The next is app_bar_main.xml. This is the functionality of the app bar at the top of the screen as well as the floating action button at the bottom of the page.<br><img alt="app_bar_main" src="img/928abd4eaa1f2ee3.png"></p>
+<p>The next one is content_main.xml. This is where you put the content for the page. Such as in part 1, the image view, button, text all goes onto this layout.<br><img alt="content_main" src="img/c3f2c586dc9b3f74.png"></p>
+<p>The last one is nav_header_main.xml. This is the header of the navigation drawer.<br><img alt="nav_header_main" src="img/bd87f094f8e5b865.png"></p>
+<p>To change the content of the Nav Drawer list, go to the menu folder.<br><img alt="menufolder" src="img/7353360a62ab98f9.png"></p>
+<p>Click on activity_main_drawer.xml. This is what the contents of the drawer is. In the example it is a list of items organized into two groups. Each item is a separate listing on the navigation drawer.</p>
+<pre><code>&lt;item
+    android:id=&#34;@+id/nav_camera&#34;
+    android:icon=&#34;@drawable/ic_menu_camera&#34;
+    android:title=&#34;Import&#34; /&gt;
+</code></pre>
+<p>The id is the id of the item. The icon is the image that is displayed next to the text and the title is what the item is displayed as.</p>
+<p>There is another file called main.xml. This is for the action settings of the top right corner. This is an alternative menu for choosing items.</p>
+<p>Run the example code and see how the navigation drawer, action settings and FAB button works. None of the items should be clickable yet.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Color the Navigation Drawer" duration="0">
+        <p>The next step, is take what we learned earlier and color the page! The FAB button color is currently under colorAccent at colors.xml.<br>You&#39;ll notice that the navigation drawer headers don&#39;t change color.</p>
+<p>To color the navigation drawer header go to drawable-&gt;side_nav_bar.xml. Click on text and you should see this</p>
+<pre><code>&lt;shape xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    android:shape=&#34;rectangle&#34;&gt;
+    &lt;gradient
+        android:angle=&#34;135&#34;
+        android:centerColor=&#34;#009688&#34;
+        android:endColor=&#34;#00695C&#34;
+        android:startColor=&#34;#4DB6AC&#34;
+        android:type=&#34;linear&#34; /&gt;
+&lt;/shape&gt;
+</code></pre>
+<p>You can mess around with the startColor, centerColor and endColor to create a cool color gradient. Or make all of them the same color and get a simple singular color at the header.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="FAB Button" duration="0">
+        <p>You&#39;ve already change the color of the FAB Button. Now to change the image. Go to app_bar_main.xml. At Line 25 there should be the code for the FAB Button.</p>
+<pre><code>    &lt;android.support.design.widget.FloatingActionButton
+        android:id=&#34;@+id/fab&#34;
+        android:layout_width=&#34;wrap_content&#34;
+        android:layout_height=&#34;wrap_content&#34;
+        android:layout_gravity=&#34;bottom|end&#34;
+        android:layout_margin=&#34;@dimen/fab_margin&#34;
+        app:srcCompat=&#34;@android:drawable/ic_dialog_email&#34; /&gt;
+</code></pre>
+<p>To change the image go to the last line of the widget code. The srcCompact is the line to change the image.</p>
+<p>To change the functionality go to MainActivity Java -&gt;MainActivity. Lines 26-32 are the lines for the FAB button. You can change what it does with the listener. For now just change the text of</p>
+<pre><code>Snackbar.make(view, &#34;Replace with your own action&#34;, Snackbar.LENGTH_LONG)
+</code></pre>
+<p>To some other text. This will pop up at the bottom of the page.</p>
+<p>Run the app and see how it works</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add a Plain Activity" duration="0">
+        <p>Now we&#39;re going to add a page, such that if I click on the Camera of the Nav Drawer it will open a new page. We&#39;re going to do this through adding a new activity.<br>Right click on app New-&gt;Activity-&gt;Navigation Drawer activity. This will create several layouts like in Add a Navigation Drawer. You can edit what you want in content_main (or what ever name the new activity calls it).</p>
+<p>Then to have the activityMain go to the new activity, go to the MainActivity Java.<br>In:</p>
+<pre><code>public boolean onNavigationItemSelected(MenuItem item) 
+</code></pre>
+<p>Add:</p>
+<pre><code>Intent intent = new Intent(this, [activityname].class);
+startActivity(intent);
+</code></pre>
+<p>to the if statement you want, such as:</p>
+<pre><code> public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        if (id == R.id.nav_camera) {
+            Intent intent = new Intent(this, cameraAct.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_gallery) {
+</code></pre>
+<p>You also have to add this in reverse in the other activity Java file. Then if you go and run the application, you can then click on the button you added this code to and go to that activity.<br>Try this out and see if it works!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add an Activity with ScrollView" duration="0">
+        <p>Now create another activity like you did above. In the layout content_[name].xml, switch to design mode.<br>In design you can add a widget called ScrollView. Make sure to add the constraints as necessary.</p>
+<p>If you run the app this will show a simple page where you can try to scroll and see the animations.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Put Images into the ScrollView" duration="0">
+        <p>Now we&#39;re going to add all the images from part 1 into the scrollview.</p>
+<p>Create a new layout that is called item.xml with this code:</p>
+<pre><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+&lt;LinearLayout xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    xmlns:app=&#34;http://schemas.android.com/apk/res-auto&#34;
+    xmlns:tools=&#34;http://schemas.android.com/tools&#34;
+    android:layout_width=&#34;wrap_content&#34;
+    android:layout_height=&#34;wrap_content&#34;
+    android:orientation=&#34;vertical&#34;
+    tools:layout_editor_absoluteX=&#34;8dp&#34;
+    tools:layout_editor_absoluteY=&#34;8dp&#34;&gt;
+
+    &lt;ImageView
+        android:id=&#34;@+id/imageViewScroll&#34;
+        android:layout_width=&#34;150dp&#34;
+        android:layout_height=&#34;150dp&#34;
+        app:srcCompat=&#34;@drawable/ic_menu_manage&#34; /&gt;
+&lt;/LinearLayout&gt;
+
+</code></pre>
+<p>Then we&#39;re going to go to the java file for the activity, in  the function onCreate() add this code:</p>
+<pre><code>    LinearLayout gallery = findViewById(R.id.galleryScroll);
+    LayoutInflater inflater = LayoutInflater.from(this);
+    for (int i = 1 ; i &lt; 9; i ++){
+        View view = inflater.inflate(R.layout.item, gallery, false);
+        ImageView image = view.findViewById(R.id.imageViewScroll);
+        //image.setImageResource(R.drawable.ic_menu_manage);
+        InputStream image_stream =null;
+        try {
+            image_stream = getAssets().open(&#34;[folder name]/[picture name]&#34;+i+&#34;.jpg&#34;);
+        } catch (Exception e ){}
+        image.setImageBitmap(BitmapFactory.decodeStream(image_stream));
+        gallery.addView(view);
+    }
+</code></pre>
+<p>This is assuming your pictures were with a common base name and a number at the end. This will add the pictures in order to the scrollView.</p>
+<p>Now go to the app and see how it works. Based on how the image is proportioned in item.xml it can change sizes and have captions etc.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Add an Activity with Input" duration="0">
+        <p>Go to a previous activity or make a new one. Then add a textView. There are multiple types of textViews, the one I use is a multiline text. You can change this under the inputType in the design layout.  You can also add a hint that will disappear once someone starts typing. Also add a button that can be used to submit.</p>
+<p>Then go to the java file for this activity and create a function for the onclick of the submit button.</p>
+<pre><code>public void submitComplaint(View v){
+    TextView text = findViewById(R.id.editText2);
+    text.getEditableText().clear();
+}
+</code></pre>
+<p>Above is an example of such. This will get the view and just clear the text in the textView. Make sure to then add this function to the onClick of the button.</p>
+<p>Now check! Any text in the text view should disappear with the button click!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Summary" duration="0">
+        <p>In summary you added a navigation drawer, new activities. You add colors, functionality to a FAB button, a scroll view and inputText</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

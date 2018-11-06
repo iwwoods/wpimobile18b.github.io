@@ -1,0 +1,301 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>CS4518 How-to: UI Mutation in React Native - By Karitta Zellerbach</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="CS4518 How-to: UI Mutation in React Native - By Karitta Zellerbach"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Overview of Tutorial" duration="0">
+        <p>This tutorial will show you how to create a basic Android app from scratch using React Native.</p>
+<p>Prerequisites:</p>
+<ul>
+<li>Android Studio 3.2</li>
+<li>Android physical or virtual devices API 27</li>
+<li>Text Editor (I suggest Atom)</li>
+<li>Homebrew (Mac)</li>
+<li>Curiosity!</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Installation" duration="0">
+        <p>First, in a terminal run the commands:</p>
+<pre><code>brew install node
+brew install watchman
+npm install -g react-native-cli
+</code></pre>
+<p>Next, you will need to add some variables to your<br><code>$HOME/.bash_profile config</code> file</p>
+<p>Specifically the lines:</p>
+<pre><code>export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/emulator
+</code></pre>
+<p>If you are on a windows computer, instructions can be found at <a href="https://facebook.github.io/react-native/docs/getting-started" target="_blank">React Native - Getting Started</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create the App" duration="0">
+        <p>Now we&#39;re ready to create our app. Open the terminal and type<br><code>react-native init PetWar</code>. You&#39;ll notice that this just created a lot of folders in this new PetWar directory and also the file <code>App.js</code>.<br>This is the file that we will be editing!</p>
+<p>Now before we start, make sure you have an AVD running. To do so, click the purple button to open the AVD Manager.</p>
+<p><img alt="Toolbar" src="img/9f810b4452f715dc.png"></p>
+<p>Then click the green arrow to run the AVD.</p>
+<p><img alt="AVD Manager" src="img/3c83b9e852691d86.png"></p>
+<p>Now, back in terminal run</p>
+<pre><code>cd Project1
+react-native run-android
+</code></pre>
+<p>You should see the app running on the AVD.<br><img alt="AVD" src="img/4550486b80e965b7.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Customization" duration="0">
+        <p>We are finally ready to write some code. As you might have been able to tell by <code>App.js</code>, we will be writing code in Javascript. Now, open <code>App.js</code> in a text editor. I recommend Atom, but you can choose your favorite.</p>
+<p>Now when you open <code>App.js</code> you&#39;ll see the code below. This code is a pretty good starting point, but we&#39;re going to need to make some changes! Also don&#39;t worry if you don&#39;t know what it means, we&#39;ll take it step by step.</p>
+<pre><code>/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
+
+import React, {Component} from &#39;react&#39;;
+import {Platform, StyleSheet, Text, View} from &#39;react-native&#39;;
+
+const instructions = Platform.select({
+  ios: &#39;Press Cmd+R to reload,\n&#39; + &#39;Cmd+D or shake for dev menu&#39;,
+  android:
+    &#39;Double tap R on your keyboard to reload,\n&#39; +
+    &#39;Shake or press menu button for dev menu&#39;,
+});
+
+type Props = {};
+export default class App extends Component&lt;Props&gt; {
+  render() {
+    return (
+      &lt;View style={styles.container}&gt;
+        &lt;Text style={styles.welcome}&gt;Welcome to React Native!&lt;/Text&gt;
+        &lt;Text style={styles.instructions}&gt;To get started, edit App.js&lt;/Text&gt;
+        &lt;Text style={styles.instructions}&gt;{instructions}&lt;/Text&gt;
+      &lt;/View&gt;
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: &#39;center&#39;,
+    alignItems: &#39;center&#39;,
+    backgroundColor: &#39;#F5FCFF&#39;,
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: &#39;center&#39;,
+    margin: 10,
+  },
+  instructions: {
+    textAlign: &#39;center&#39;,
+    color: &#39;#333333&#39;,
+    marginBottom: 5,
+  },
+});
+</code></pre>
+<p>Let&#39;s start from the top...</p>
+<pre><code>import React, {Component} from &#39;react&#39;;
+import {Platform, StyleSheet, Text, View} from &#39;react-native&#39;;
+</code></pre>
+<p>These <code>import</code> statements are pretty great. If you try to run the app without them you&#39;ll find that you have a bunch of errors. They let us import modules to use in our app. You might notice the word <code>Platform</code>. This allows us to separate the code by platform (e.g. iOS and Android). However, since we&#39;re just focusing on Android in this tutorial, we can get rid of it.</p>
+<p>Let&#39;s add some more modules that might be useful later.</p>
+<pre><code>import {Text, View, Image, Button, Alert, StyleSheet} from &#34;react-native&#34;;
+</code></pre>
+<p>Now let&#39;s add our first image. Make sure you have the image in the folder with App.js.<br>Let&#39;s add the image right below the &#34;Welcome to React Native!&#34; text component using the line:</p>
+<pre><code>&lt;Image source={require(&#39;./puppy.jpg&#39;)}/&gt;
+</code></pre>
+<p>We can refresh the the AVD by double tapping the ‘R&#39; key.</p>
+<p><img alt="AVD" src="img/6d7188407cc43082.png"></p>
+<p>That&#39;s a <strong>big</strong> puppy! Depending on your image, the scaling might be a little off. Let&#39;s fix that by setting our width and height to undefined, forcing it to fit to the width of it&#39;s parent. We&#39;re going to make these changes in the stylesheet. You may have noticed this line of code <code>&lt;Text style={styles.welcome}&gt;</code>. This means that specific Text component uses the style <code>welcome</code>, which is defined in the stylesheet.</p>
+<pre><code>const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: &#39;center&#39;,
+    backgroundColor: &#39;#F5FCFF&#39;,
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: &#39;center&#39;,
+    margin: 10
+    backgroundColor: &#39;steelblue&#39;
+  },
+  photo: {
+    width: undefined,
+    height: undefined,
+    flex: 1,
+    justifyContent: &#39;center&#39;
+  }
+});
+</code></pre>
+<p>Now let&#39;s refresh our app again.</p>
+<p><img alt="AVD" src="img/c5b2df5b74f93149.png"></p>
+<p>Much better! But now we should update our text. Change the text from &#34;Welcome to React Native!&#34; to anything you want. We&#39;re also going to change the background color. To do this, we can just add the backgroundColor into the stylesheet. I&#39;ve chosen steelblue.</p>
+<pre><code>welcome: {
+  fontSize: 20,
+  textAlign: &#39;center&#39;,
+  margin: 10,
+  backgroundColor: &#39;steelblue&#39;
+}
+</code></pre>
+<p><img alt="AVD" src="img/a17d2b278d76dfa4.png"></p>
+<p>Hmmm... that doesn&#39;t look too great. Let&#39;s see what happens when we change the word <code>margin</code> to <code>padding</code> in the stylesheet.</p>
+<p><img alt="AVD" src="img/54261dbfc7708273.png"></p>
+<p>Looking pretty snazzy! You&#39;ll notice the difference between the two. Padding refers to the amount of space within the component, while margin specifies the area outside.</p>
+<p>Now let&#39;s add a button.</p>
+<pre><code>&lt;Button title=&#34;Woof!&#34; onPress={() =&gt; {Alert.alert(&#34;Woof!&#34;);}}/&gt;
+</code></pre>
+<p>The <code>onPress</code> property is required for buttons in React Native. In this instance, we&#39;re creating an alert that will say &#34;Woof!&#34; when the user presses the button.</p>
+<p><img alt="AVD" src="img/3200751e7db2b6d4.png"></p>
+<p>Still looking a little boring though. Let&#39;s fix that by adding some views around the button.</p>
+<pre><code>&lt;View style={{ flex: 0.5, backgroundColor: &#34;skyblue&#34; }} /&gt;
+&lt;Button title=&#34;Woof!&#34; onPress={() =&gt; {Alert.alert(&#34;Woof!&#34;);}}/&gt;
+&lt;View style={{ flex: 0.5, backgroundColor: &#34;powderblue&#34; }} /&gt;
+</code></pre>
+<p><img alt="AVD" src="img/baea54019e5962f.png"></p>
+<p>That looks much better. But I notice you have a question on your mind... what is <code>flex</code> you ask? Well, <code>flex</code> takes values to scale components proportionally. So a component with flex set to 2 will take twice the space as a component with flex set to 1. I personally prefer this to hardcoding values!</p>
+<p>Moving on, the button looks a little wide don&#39;t you think? Let&#39;s wrap a view around it so we can center it. First we&#39;ll have to create the style for the view. I&#39;ve created one called <code>buttonSection</code>.</p>
+<pre><code>buttonSection: {
+flex: 1,
+justifyContent: &#34;center&#34;,
+alignItems: &#34;center&#34;,
+backgroundColor: &#34;skyblue&#34;
+}
+</code></pre>
+<p>Now we just need to add <code>&lt;View style={styles.buttonSection}&gt; .... &lt;/View&gt;</code> around the button.</p>
+<p><img alt="AVD" src="img/145a1448cff181b4.png"></p>
+<p>While we&#39;re at it, let&#39;s take it one step further. Let&#39;s make the colors line up in a row. We can do this by specifying the flexDirection to row in the parent component, which means that the child components inside it will now be organized horizontally.</p>
+<pre><code>&lt;View style={{flex: 1, flexDirection: &#39;row&#39;}}&gt;
+  &lt;View style={{flex: 1, backgroundColor: &#39;powderblue&#39;}} /&gt;
+  &lt;View style={styles.buttonSection}&gt;
+    &lt;Button title=&#34;Woof!&#34; onPress={() =&gt; {Alert.alert(&#34;Woof!&#34;);}}/&gt;
+  &lt;/View&gt;
+  &lt;View style={{flex: 1, backgroundColor: &#39;steelblue&#39;}} /&gt;
+&lt;/View&gt;
+</code></pre>
+<p><img alt="AVD" src="img/7847b0898bde50bd.png"></p>
+<p>Now that&#39;s a color gradient! Let&#39;s make some final changes to the styling. I don&#39;t know about you, but that Puppy War text is still pretty boring.</p>
+<pre><code>welcome: {
+  flex: 0.5,
+  fontSize: 20,
+  textAlign: &#39;center&#39;,
+  padding: 10,
+  backgroundColor: &#39;steelblue&#39;,
+  textShadowColor: &#39;grey&#39;,
+  textShadowOffset: {width: -1, height: 1},
+  textShadowRadius: 10,
+  fontFamily: &#39;monospace&#39;,
+  fontSize: 30,
+  color: &#39;white&#39;
+},
+</code></pre>
+<p>You can add however many properties you want. I&#39;ve chosen to make the text a little bigger and have given it a grey shadow, as well as setting the font to monospace.</p>
+<p><img alt="AVD" src="img/9356191d2d35e288.png"></p>
+<p>Alright we&#39;re almost done! I think we should just add some more puppy photos for good measure. You can add as many photos as you like. We&#39;re going to store them in an array outside our <code>App</code> class.</p>
+<pre><code>var arr = [
+  { image: require(&#34;./puppy.jpg&#34;) },
+  { image: require(&#34;./puppy2.jpg&#34;) },
+  { image: require(&#34;./puppy3.jpg&#34;) }
+];
+
+export default class App extends Component&lt;Props&gt; {
+</code></pre>
+<p>But wait...how are we going to keep track of which puppy to show? We&#39;re going to need a variable we can retrieve and update. This is where states are handy! States are Javascript objects that are managed within the component, just like class variables.</p>
+<p>We&#39;re going to use a constructor to define the initial state, which will be the first puppy image (index = 0).</p>
+<pre><code>constructor(props) {
+  super(props);
+  this.state = {
+    counter: 0
+  };
+}
+</code></pre>
+<p>Now we can change the source of our image to our puppy image array.</p>
+<pre><code>source={arr[this.state.counter].image}
+</code></pre>
+<p>We just need to increment the counter somehow... maybe that onPress() function will come in handy.</p>
+<pre><code>&lt;Button title=&#34;Woof!&#34; onPress={() =&gt;
+  {Alert.alert(&#34;Woof!&#34;);
+  if (this.state.counter == arr.length-1){
+      this.setState({ counter: 0 });
+    } else {
+      this.setState({ counter: this.state.counter + 1 });
+    }
+  }}/&gt;
+</code></pre>
+<p>Indeed it did! We also have to check if the current index is the last index of the array, in which case we have to go back to 0 to avoid any out of bounds exceptions.</p>
+<p><img alt="AVD" src="img/435aa6e64c4c8663.png"></p>
+<p>I think this looks pretty good for a first React Native app. Good job!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Summary and Resources" duration="0">
+        <p>In this tutorial we&#39;ve created an Android App from scratch using React Native.</p>
+<p>However, if you don&#39;t want to create an app from scrach and are interested in how to integrate your existing Android app to React Native <a href="https://facebook.github.io/react-native/docs/integration-with-existing-apps" target="_blank">this website</a> provides a great tutorial.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

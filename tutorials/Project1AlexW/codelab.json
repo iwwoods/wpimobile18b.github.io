@@ -1,0 +1,22 @@
+{
+  "environment": "web",
+  "source": "project1_AlexW.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2018-11-05T21:37:17-05:00",
+  "id": "Project1AlexW",
+  "duration": 0,
+  "title": "CS4518 How-to: Create My APP with colors and navigation drawers - By Alexandra Wheeler",
+  "author": "Alexandra Wheeler",
+  "summary": "How to for part two of project one",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "common"
+  ],
+  "tags": [],
+  "url": "Project1AlexW"
+}

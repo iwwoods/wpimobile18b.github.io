@@ -1,0 +1,220 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Antony Qin&#39;s Project1 PartB Tutorial</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Antony Qin&#39;s Project1 PartB Tutorial"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Overview of Tutorial" duration="0">
+        <p>This tutorial will show you how to separate PartA code into fragments. Then it will also add animations and flair to the existing UI. In this tutorial you will do the following:</p>
+<ul>
+<li>Use fragments!</li>
+<li>Add transition animations to pictures!</li>
+</ul>
+<p>Prerequisites:</p>
+<ul>
+<li>PartA of CS4518 Project1</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Miscellaneous:" duration="0">
+        <h2>Migrate to AndroidX</h2>
+<ul>
+<li>Go to <code>Refactor &gt; Migrate to AndroidX...</code> and click on Migrate to AndroidX.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Setting up the fragments:" duration="0">
+        <h2>Creating the fragment XML files</h2>
+<ul>
+<li>PartA has a picture and a button, and we want to convert each to a fragment. Think of fragments as parts of an activity that do a specific task. One fragment will handle changing the picture. The other fragment will handle the button and send the request to change the picture.</li>
+<li>Make sure your project is in Android view. Navigate to <code>app &gt; res &gt; layout</code> and right click on layout. In the resulting menu, navigate to <code>new &gt; layout resource file</code>.</li>
+</ul>
+<p><img alt="layoutResourceFile" src="img/7a194feeb2bbdb6e.jpg"></p>
+<ul>
+<li>Name one fragment a name such as &#34;fragment_pup_control.xml&#34; and give it the ConstraintLayout. This will control the button.</li>
+</ul>
+<p><img alt="fragmentPupControlMake" src="img/b9fb3a5594183798.jpg"></p>
+<ul>
+<li>Create another fragment a name such as &#34;fragment_pup_pics.xml&#34; and the ConstraintLayout. This will control the picture.</li>
+<li>Drag two ImageViews into the ConstraintLayout.<br><br><ul>
+<li>One will be the picture the user sees, the other will swoop in on picture transistion.</li>
+</ul>
+</li>
+<li>For each ImageView, modify the IDs. I used &#34;imageView_pupPic&#34; and &#34;imageView_pupPicSwoopIn&#34;.</li>
+<li>Constrain each ImageView to the edges of its parent. I gave it constraints of 0 or each cardinal direction.</li>
+<li>Set layout_width and layout_height to match_constraint.</li>
+</ul>
+<p><img alt="fragmentPupPicsXML" src="img/7bff04e7f14197bc.jpg"></p>
+<ul>
+<li>Double click on &#34;fragment_pup_control.xml&#34;, and go to design view.</li>
+<li>Drag a button into the ConstraintLayout.</li>
+<li>Modify the ID option, I used &#34;buttonPupMe&#34;.</li>
+<li>Constrain it to the edges of its parent. I gave it constaints of 0 for left and right, and 64 for top and bottom.</li>
+<li>Set layout_width and layout_height to match_constraint.</li>
+<li>Navigate to the backgroundTint option and click on the three dots. Create an appealing color for the button and name it what you want.</li>
+</ul>
+<p><img alt="newColor" src="img/be2ff6a9a7083c9f.jpg"></p>
+<ul>
+<li>In the text option, input the text you want the button to display. I chose &#34;Pup Me!&#34;<br><br><ul>
+<li>You could also edit the &#34;string.xml&#34; file in <code>app &gt; res &gt; values</code> and link that to the text option.</li>
+</ul>
+</li>
+<li>In order to make the button more appealing, one could round the corners.<br><br><ul>
+<li>Navigate to <code>app &gt; res &gt; drawable</code> and create a new XML file, I named mine round_button.xml.</li>
+<li>Add this to the file:</li>
+<li>Now in the background option, link in this new file.</li>
+</ul>
+</li>
+<li>Remember to go to the textColor option and change the color to constrast with the backgroundTint color. Also modify textSize or fontFamily as you see fit.</li>
+</ul>
+<p><img alt="fragmentPupControlXML" src="img/8151358546a4685f.jpg"></p>
+<h2>Creating the fragment java files</h2>
+<ul>
+<li>Navigate to <code>app &gt; java &gt; wpi.[name].guicodelab</code> and right click. In the resulting menu, navigate to <code>new &gt; java class</code>.</li>
+</ul>
+<p><img alt="newJavaClass" src="img/593bb9218d81f664.jpg"></p>
+<ul>
+<li>Name the file something like &#34;FragmentPupControl.java&#34;. This file will control the fragment containing the button.</li>
+</ul>
+<p><img alt="newJavaClassPupControl" src="img/1818c12174f6d5bc.jpg"></p>
+<ul>
+<li>Create another class, and name the file something like &#34;FragmentPupPics.java&#34;. This file will control the fragment containing the picture.</li>
+</ul>
+<h2>Button Fragment java file</h2>
+<ul>
+<li>Open the &#34;FragmentPupControl.java&#34; file.</li>
+<li>Add the following:</li>
+</ul>
+<p><img alt="fragmentPupControlJava" src="img/edb5bacc46212e16.jpg"></p>
+<ul>
+<li>The &#34;PupControlListener&#34; is an interface that will be used to force the MainActivity to implement the methods to change the picture and disable/enable the button.</li>
+<li>The overridden onAttach() function is used to attach this fragment to its parent (MainActivity).</li>
+</ul>
+<h2>Picture Fragment java file</h2>
+<ul>
+<li>Open the &#34;FragmentPupControl.java&#34; file.</li>
+<li>Add the following:</li>
+</ul>
+<p><img alt="fragmentPupPicsJava" src="img/a44903b819947168.jpg"></p>
+<ul>
+<li>In the &#34;OnCreate()&#34; function, a random image is being loaded from the folder of puppy pictures. The image is converted to a circle.</li>
+<li>The &#34;setMainController()&#34; function in order for this fragment to send requests to the MainActivity.</li>
+<li>Add the &#34;changePupPic()&#34; function. This function is used to change the picture by animating the picture exiting the screen, and animating the new replacement picture to take the place of the old picture.<br><br><ul>
+<li>This first statement of the function sends a request to disable the button to switch pictures while the pictures are in the process of animating.</li>
+<li>The while loop chooses a random picture that is not the current picture.</li>
+<li>Inside the try block, the new picture is selected and turned into a circle.<br><br></li>
+</ul>
+</li>
+</ul>
+<p><img alt="changePupPicA" src="img/b80f41dca8314a8d.jpg"></p>
+<ul>
+<li>Add the second part of the &#34;changePupPic()&#34; function.<br><br><ul>
+<li>The first 4 statements animate the old picture, letting it exit the right of the screen, shrink, and spin.</li>
+<li>The second 4 statements animate the new picture coming in, letting it enter the left of the screen, grow, and spin.</li>
+<li>The &#34;swoopSet&#34; variable is a AnimatorSet object that packages up all the animations, and plays them all at the same time.<br><br><ul>
+<li>At the end of the animations, swap the two imageview variables and send a request to reenable the button</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="changePupPicB" src="img/3d793d75b06e774f.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Refactoring up the main activity:" duration="0">
+        <h2>Modifying the activity_main XML file:</h2>
+<ul>
+<li>Open the &#34;activity_main.xml&#34; file from PartA.</li>
+<li>Remove the Button and ImageView.</li>
+<li>Navigate to the Containers category in the Palette and drag in a , select the class of the picture fragment.</li>
+<li>Drag in another , select the class of the button fragment.<br><br></li>
+</ul>
+<p><img alt="dragInFragment" src="img/e1c4db922b35d2cd.jpg"></p>
+<ul>
+<li>Click on the picture fragment, change to design mode, and change the ID. I used &#34;fragment_pupPics&#34;.<br><br><ul>
+<li>Give it constraints, I had 32 from the top, 0 from the left and right, and 0 at its bottom constrained to the button fragment.</li>
+<li>Change layout_width and layout_height to match_constraint<br><br></li>
+</ul>
+</li>
+</ul>
+<p><img alt="pupPicDesign" src="img/731ef085ec427a8b.jpg"></p>
+<ul>
+<li>Click on the button fragment, change to design mode, and change the ID. I used &#34;fragment_pupControl&#34;.<br><br><ul>
+<li>Give it constraints, I had 0 at its the top constrained to the picture fragment, 32 from the left and right, and 0 from the bottom.</li>
+<li>Change layout_width and layout_height to match_constraint.<br><br></li>
+</ul>
+</li>
+</ul>
+<p><img alt="pupControlDesign" src="img/38471a59f1c3f16e.jpg"></p>
+<h2>Modifying the MainActivity.java file:</h2>
+<ul>
+<li>Open the &#34;MainActivity.java&#34; file from PartA.</li>
+<li>Modify it until it looks like the following:</li>
+</ul>
+<p><img alt="Main Activity Java" src="img/42fd6ab32db663a9.jpg"></p>
+<ul>
+<li>&#34;MainActivity&#34; implements the interface from the button fragment so it guarantees it implements the methods to change the picture, and disable/enable the buttons.</li>
+<li>In each of these guaranteed methods, the main activity grabs the fragment in control of the function and calls the method associated from the fragment</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>
