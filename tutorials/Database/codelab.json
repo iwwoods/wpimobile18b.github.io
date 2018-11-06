@@ -1,0 +1,23 @@
+{
+  "environment": "web",
+  "source": "Database.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2018-11-06T17:16:44-05:00",
+  "id": "Database",
+  "duration": 0,
+  "title": "CS4518 Android Application Database Tutorial",
+  "author": "Sam Ogden",
+  "summary": "CS4518 Android Database Tutorial",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "storage",
+    "databases"
+  ],
+  "tags": [],
+  "url": "Database"
+}

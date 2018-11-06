@@ -1,0 +1,222 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>CS4518 Android Application Database Tutorial</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="CS4518 Android Application Database Tutorial"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Overview of Tutorial" duration="0">
+        <p>In this tutorial we&#39;ll be introducing you to the SQLite3 database system that&#39;s on android.  SQLite3 is a simple database system that saves your database as a file which makes it simple to get on and off of your device when you&#39;re ready to process it.</p>
+<p>In this tutorial we&#39;ll be doing the following:</p>
+<ul>
+<li>Writing a logging application that uses a SQLite3 database on Android</li>
+<li>Setting up a simple DB struture on android</li>
+<li>Simple android text entry</li>
+<li>Inserting entered text, along with a timestamp, into the database</li>
+<li>Retrieving databases from your android device</li>
+</ul>
+<p>Prerequisites:</p>
+<ul>
+<li>Android studio installed</li>
+<li>Simple GUI creation skills</li>
+<li>Basic DB knowledge</li>
+<li>ADB (Android Debugging Bridge) installed<br><br><ul>
+<li>Download and install instructions can be found at <a href="https://developer.android.com/studio/command-line/adb" target="_blank">https://developer.android.com/studio/command-line/adb</a></li>
+</ul>
+</li>
+<li>SQLite3 installed on your computer<br><br><ul>
+<li>Download and install instructions can be found at <a href="https://www.tutorialspoint.com/sqlite/sqlite_installation.htm" target="_blank">https://www.tutorialspoint.com/sqlite/sqlite_installation.htm</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Make a New Project" duration="0">
+        <p>Similar to the UI tutorial you&#39;ll want to set up a new project.  This time, like last time, make it a blank project.<br>The only difference is that now you should name it something along the lines of &#34;Database Tutorial&#34; because I am still boring.<br>Again, pick an empty activity since it&#39;s more fun for us to build from scratch!</p>
+<p><img alt="New Application ready to go!" src="img/1eeb5c11cec544e3.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Setting up your SQLite3 database classes" duration="0">
+        <p>Android has largely built-in SQLite3 support meaning that integrating it into applications is relatively simple, if a bit low-level at times.  Doing so requires making two java classes.<br>The first is the contract class which defines how your database looks.  That is, it defines the columns and basic behavior.<br>The second class is the helper class which defines the creation and deletion of your database.  For example, this class defines the name of your database on disk as well as what happens when you change the version of your database.</p>
+<h2>A very quick SQLite3 overview</h2>
+<p>SQLite3 is a database that is stored as a file on disk.  This makes it very easy to import and export SQLite3 databases, making them appealing to simple applications.  This also allows SQLite3 databases to be very simple to run and so are included in a number of popular projects, such as python.</p>
+<p>However, this simplicity also means that SQLite3 has some limitations on features.  For instance, there are only 5 available datatypes in SQLite3: NULL, INTEGER, REAL, TEXT and BLOB.  This means that for more complex datatypes, such as timestamps, there has to be external logic in order to parse these fields.</p>
+<h2>Designing your database</h2>
+<p>Our first step is to design our database.  Our first database will be super simple: just a log entry and a timestamp.  Therefore we just need two kinds of field, TEXT and REAL, for the entry and the timestamp respectively.</p>
+<p>The first step is to make a new contract class.  To do this create a new javaclass titled <code>LogContract</code>.</p>
+<p><img alt="Adding a new class in Android Studio" src="img/705b580cfc84ba90.png"></p>
+<p>Next, we add in a private constructor with <code>private LogContract() {}</code>.  This is done to ensure that this class can never be directly instanctiated.</p>
+<p>After this, we add in a private class, <code>LogEntry</code>, that extends BaseColumns and defines the name of our table and the columns in it.  This looks like the below.</p>
+<pre><code>public static class LogEntry implements BaseColumns {
+    public static final String TABLE_NAME = &#34;logEntries&#34;;
+
+    public static final String COLUMN_NAME_ENTRY = &#34;entry&#34;;
+    ...
+}
+</code></pre>
+<p>Finally, we need to define two strings that will create or delete our tables.  These take the form of SQL commands.  While in general these can be a bit complex, ours are relatively straight forward.  Below is the start of the creation string.</p>
+<pre><code>private static final String SQL_CREATE_ENTRIES =
+        &#34;CREATE TABLE &#34; + LogEntry.TABLE_NAME + &#34; (&#34; +
+                LogEntry._ID + &#34; INTEGER PRIMARY KEY,&#34; +
+                LogEntry.COLUMN_NAME_ENTRY + &#34; TEXT,&#34; +
+                ...
+</code></pre>
+<p>The deletion string is the reverse of this:</p>
+<pre><code>private static final String SQL_DELETE_ENTRIES =
+    &#34;DROP TABLE IF EXISTS &#34; + LogEntry.TABLE_NAME;
+</code></pre>
+<p>Excellent!  Our contract class is all written so our database should be defined!</p>
+<h2>General database management file</h2>
+<p>To make use of our contract class we need to make a helper class that will perform all of the actions needed for databases, as well as defining the aspects of our DB.</p>
+<p>To do this we need to make another new class, <code>LogEntryDbHelper</code> which extends SQLiteOpenHelper.  There are three functions we need to implement: <code>onCreate</code>, <code>onUpgrade</code>, and <code>onDowngrade</code>.  These are largely implemented with the create and delete strings we defined in our <code>LogEntry</code> class.</p>
+<pre><code>public class LogEntryDbHelper extends SQLiteOpenHelper {
+    // If you change the database schema, you must increment the database version.
+    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = &#34;LogEntries.db&#34;;
+
+    public LogEntryDbHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(...);
+    }
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // This database is only a cache for online data, so its upgrade policy is
+        // to simply to discard the data and start over
+        db.execSQL(...);
+        onCreate(db);
+    }
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        onUpgrade(db, oldVersion, newVersion);
+    }
+
+}
+</code></pre>
+<p>Okay!  Now our database is all setup and should be ready for us to call up and use in our code!  If we run our app we should see... absolutely nothing because we have yet to make a GUI.  Let&#39;s do that.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Make a GUI!" duration="0">
+        <p>So let&#39;s make a simple GUI that includes a button and a text entry box and a text output box.  These have been in previous tutorials so you should be pros at this now.</p>
+<p><img alt="Make it look like this!" src="img/722a7485d754c83b.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Using your database!" duration="0">
+        <p>First things first, you need to instantiate your helper object so you can use it.  Doing this in your onCreate allows you to use it throughout.  Create a LogEntryDbHelper called <code>mDbHelper</code>.<br>To add entries to your db you need to get a writable object.  You get this by calling <code>getWriteableDatabase()</code> on your dbHelper object.</p>
+<p>Finally you&#39;re ready to add objects to your DB!</p>
+<p>First, you need to create a <code>ContentValues</code> object to which you add your column values using <code>put(_name_, _value_)</code><br>Next, you should find how to capture your two values.  Remember, these are the text from your editText field and the timestamp when your data is submitted.</p>
+<p>Once you have your values object add values you can use the <code>insert(...)</code> value on your db to add these values to your DB.</p>
+<h2>Clearing for the next entry</h2>
+<p>Now we should prep the textbox to accept the next entry.  We can do this by using the <code>setText(...)</code> function on the editText element and setting it to an empty string.</p>
+<h2>Counting the database entries</h2>
+<p>Just pushing data into our database doesn&#39;t give any sort of nice feedback.  Let&#39;s fix this by using that textView box we created during the GUI phase.</p>
+<p>To do this let&#39;s make a new function, <code>updateLogCount()</code> that we can call from anywhere.  This function will connect to the DB as a read database and read the number of entries.</p>
+<p>To create this function you need use <code>getReadableDatabase()</code> to get a connection to read data from the database, and <code>DatabaseUtils.queryNumEntries(...)</code> to count the number of entries.</p>
+<p>After you&#39;re done it should look like this:</p>
+<p><img alt="Counting the number of entries into the app" src="img/7b5c9025d187145a.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Entering some text to test it out!" duration="0">
+        <p>Okay!  Now just enter some text to your app, click the button and watch the counter go up!  It&#39;s like a fun(?) game with graphics created by you!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Getting your database from your device!" duration="0">
+        <p>There are much better tutorials than this for actually using ADB and SQLite3 and so I would recommend looking around a bit to find them.  However, for the quick and dirty &#34;getting your database off your device&#34; this should get you started and your database backed up.</p>
+<p>First thing to do is to fire up your favorite terminal application and navigate to a folder that you want to store your database in.</p>
+<h2>Seeing what devices are attached</h2>
+<p>Next, we&#39;ll want to see what devices you have attached.  These will be all the AVDs or real devices attached to your computer.  The command to see this information is <code>adb devices</code><img alt="I only have one device, my emulator" src="img/3f681172305c42a.png"></p>
+<p>If you only have a single device it will default to that one but if you have multiple you will have to specify which one you want to interact with using the <code>-s</code> flag.</p>
+<h2>Basic shell interactions</h2>
+<p>Once you have your device ID the simplest way to interact with it is to pull up a shell connection to it.  You do this by using the shell command as below.</p>
+<p><img alt="Using the shell application" src="img/909baadb1f58edb7.png"></p>
+<p>This shell works with most simple linux commands, such as <code>ls</code>, but is limited in the permissions that is has.  This means there are many files that are off limits.  For instance, we can&#39;t get to our database file this way unless we use a different call.</p>
+<h2><code>run-as</code> flag</h2>
+<p>Similar to how you can use <code>su [user]</code> on a *nix system, ADB allows you to add a <code>run-as</code> flag to the end of your shell command.  This can allow you to run as this application.<br><br>This allows us to use our ID string as our user ID and thus be able to access files within the app&#39;s tree.</p>
+<p><img alt="Running as our app" src="img/f83bc8aa957eb96c.png"></p>
+<h2>Finding our database</h2>
+<p>Now that you have a quick idea how to run as your app it is time to find out database file and get it back to our computer.<br><br>SQLite3 databases are located at <code>/data/data/[your app name]/databases/[your database name]</code>.</p>
+<p>So for me, my database is located at <code>/data/data/wpi.ssogden.databasetutorial/databases/LogEntries.db</code>.</p>
+<aside class="special"><p>Note that because we are using <code>run-as</code> this path can be shorted to just the relative path from the home of the wpi.ssogden.databasetutorial app.  That is, so long as we are using <code>run-as</code> we can just use <code>databases/LogEntries.db</code>.</p>
+</aside>
+<h2>Getting our database</h2>
+<p>There&#39;s two steps to getting this database off your device.  The first is to copy it to public shared storage and the second is to copy it from this public storage to off the device.</p>
+<p>To copy the database to public storage we want to use the same shell command as before but instead of leaving it blank and getting a shell to work in we want to give it a specific command.  The format for this is:</p>
+<pre><code>adb -s [device_id] shell run-as [app_id] &#39;[command]&#39;
+</code></pre>
+<p>The command that we want to use is <code>cp [path_to_database] /sdcard</code>.  This will copy our database to the open external storage device.</p>
+<p>The next command is the <code>adb pull</code> command, which allows us to copy a file from our device to our computer.  We just use <code>adb -s [device_id] pull [file_location]</code> where the file location is now <code>/sdcard/[database_name]</code>.<br>Running this command we pull the file to our local system where we can load it into our favorite SQLite3 reader.</p>
+<p><img alt="Pulling file to our computer" src="img/3052a33f9a80440.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="More information" duration="0">
+        <p>A lot more details about using SQLite3 on Android can be found at <a href="https://developer.android.com/training/data-storage/sqlite" target="_blank">https://developer.android.com/training/data-storage/sqlite</a></p>
+<p>The main ADB information page is at <a href="https://developer.android.com/studio/command-line/adb" target="_blank">https://developer.android.com/studio/command-line/adb</a> and is really helpful long term so I&#39;d recommend giving it a good read over.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

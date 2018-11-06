@@ -12,3 +12,4 @@ permalink: /revisions/
 - Oct 31: uploaded **lecture 3** and **project 2**; updated **topic survey description**, and TA office hours.  
 - Nov 2: uploaded **lecture 4** and **readings 5**, **readings 6**. 
 - Nov 4: posted **topic survey proposal feedback**. 
+- Nov 6: uploaded **lecture 5** and **project 3**; sent out the google cloud credits. 

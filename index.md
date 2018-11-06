@@ -15,8 +15,8 @@ layout: home
 ## Announcements
 Please refer to [here](/revisions/) for a complete list of past announcements. 
 
-- Nov 2: uploaded **lecture 4** and **readings 5**, **readings 6**. 
 - Nov 4: posted **topic survey proposal feedback**. 
+- Nov 6: uploaded **lecture 5** and **project 3**; sent out the google cloud credits. 
 
 ## Schedule  ##
 
@@ -24,9 +24,9 @@ Please refer to [here](/revisions/) for a complete list of past announcements.
 |-------|--------|---------|
 | Lecture 1 | [Intro to Mobile and Ubiquitous Computing <br> Android Basic](https://ia.wpi.edu/cs4518/resources.php) | [reading 1](https://ia.wpi.edu/cs4518/resources.php) | [group project](https://ia.wpi.edu/cs4518/resources.php), proposal/deliverable due Nov. 30/Dec. 13 11:59:59PM <br>  [project 1](https://ia.wpi.edu/cs4518/resources.php), due Tuesday Oct. 30 11:59:59PM
 | Lecture 2 | [Android Basic: part 2](https://ia.wpi.edu/cs4518/resources.php) | [reading 2](https://ia.wpi.edu/cs4518/resources.php)  | [topic survey](https://ia.wpi.edu/cs4518/resources.php), proposal/deliverable due Nov. 2/Nov. 19 11:59:59PM <br>
-| Lecture 3 | Mobile Data Acquisition: part 1  | [reading 3](https://ia.wpi.edu/cs4518/resources.php)    | [project 2](https://ia.wpi.edu/cs4518/resources.php), due Tuesday Nov. 6 11:59:59PM 
-| Lecture 4 | Mobile Data Acquisition: part 2  |[reading 4](https://ia.wpi.edu/cs4518/resources.php)  |
-| Lecture 5 | Mobile Data Storage: part 1   | [reading 5](https://ia.wpi.edu/cs4518/resources.php) | [project 3](url), due Tuesday Nov. 13 11:59:59PM 
+| Lecture 3 | [Mobile Data Acquisition: part 1](https://ia.wpi.edu/cs4518/resources.php)  | [reading 3](https://ia.wpi.edu/cs4518/resources.php)    | [project 2](https://ia.wpi.edu/cs4518/resources.php), due Tuesday Nov. 6 11:59:59PM 
+| Lecture 4 | [Mobile Data Acquisition: part 2](https://ia.wpi.edu/cs4518/resources.php)  |[reading 4](https://ia.wpi.edu/cs4518/resources.php)  |
+| Lecture 5 | [Mobile Data Storage: part 1](https://ia.wpi.edu/cs4518/resources.php)   | [reading 5](https://ia.wpi.edu/cs4518/resources.php) | [project 3](https://ia.wpi.edu/cs4518/resources.php), due Tuesday Nov. 13 11:59:59PM 
 | Lecture 6 | Mobile Data Storage: part 2 | [reading 6](https://ia.wpi.edu/cs4518/resources.php) |
 | Lecture 7 | Data manipulation: part 1 | [reading 7](url) | [project 4](url), due Tuesday Nov. 20 11:59:59PM 
 | Lecture 8 | Data manipulation: part 2 | [reading 8](url) |
