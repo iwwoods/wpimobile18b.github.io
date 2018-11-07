@@ -13,3 +13,4 @@ permalink: /revisions/
 - Nov 2: uploaded **lecture 4** and **readings 5**, **readings 6**. 
 - Nov 4: posted **topic survey proposal feedback**. 
 - Nov 6: uploaded **lecture 5** and **project 3**; sent out the google cloud credits. 
+- Nov 7: posted **four** Project 1 Part 2 tutorials! Check them out if you want more mobile hands-on experience.  
