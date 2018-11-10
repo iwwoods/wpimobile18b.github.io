@@ -1,0 +1,295 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>TensorFlow For Poets</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style>
+    body {
+      font-family: "Roboto",sans-serif;
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="TensorFlow For Poets"
+                  environment="web"
+                  feedback-link="https://github.com/tensorflow/tensorflow/issues">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p><a href="https://www.tensorflow.org" target="_blank">TensorFlow</a> is an open source library for numerical computation, specializing in machine learning applications. </p>
+<h2><strong>What you will build</strong></h2>
+<p>In this codelab, you will learn how to run TensorFlow on a single machine, and will train a simple classifier to classify images of flowers. </p>
+<p><img style="max-width: 231.00px" src="img/3021186b83bc90c2.png"></p>
+<p> Image CC-BY by Retinafunk</p>
+<pre>daisy (score = 0.99071)
+sunflowers (score = 0.00595)
+dandelion (score = 0.00252)
+roses (score = 0.00049)
+tulips (score = 0.00032)</pre>
+<p>We will be using transfer learning, which means we are starting with a model that has been already trained on another problem. We will then retrain it on a similar problem. Deep learning from scratch can take days, but transfer learning can be done in short order.</p>
+<p>We are going to use a model trained on the <a href="http://image-net.org/" target="_blank">ImageNet</a> Large Visual Recognition Challenge <a href="http://www.image-net.org/challenges/LSVRC/2012/" target="_blank">dataset</a>. These models can differentiate between 1,000 different classes, like Dalmatian or dishwasher. You will have a choice of model architectures, so you can determine the right tradeoff between speed, size and accuracy for your problem.</p>
+<p>We will use this same model, but retrain it to tell apart a small number of classes based on our own examples.</p>
+<h2 class="checklist"><strong>What you&#39;ll Learn</strong></h2>
+<ul class="checklist">
+<li>How to use Python and TensorFlow to train an image classifier</li>
+<li>How to classify images with your trained classifier</li>
+</ul>
+<h2><strong>What you need</strong></h2>
+<ul>
+<li>A basic understanding of Linux commands</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Setup" duration="1">
+        <h2>Install TensorFlow</h2>
+<p>Before we can begin the tutorial you need to <a href="https://www.tensorflow.org/versions/r1.7/install/" target="_blank">install TensorFlow</a> version 1.7.</p>
+<aside class="warning"><p>This codelab was tested on TensorFlow 1.7</p>
+<p><code>&gt; pip install --upgrade  &#34;tensorflow==1.7.*&#34;</code></p>
+</aside>
+<h2>Clone the git repository</h2>
+<p>All the code used in this codelab is contained in this git repository. Clone the repository and <code>cd</code> into it. This is where we will be working.</p>
+<pre>git clone https://github.com/googlecodelabs/tensorflow-for-poets-2
+
+cd tensorflow-for-poets-2</pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Download the training images" duration="5">
+        <p>Before you start any training, you&#39;ll need a set of images to teach the model about the new classes you want to recognize. We&#39;ve created an archive of creative-commons licensed flower photos to use initially. Download the photos (218 MB) by invoking the following two commands: </p>
+<pre>curl http://download.tensorflow.org/example_images/flower_photos.tgz \
+    | tar xz -C tf_files</pre>
+<p>You should now have a copy of the flower photos. Confirm the contents of your working directory by issuing the following command:</p>
+<pre>ls tf_files/flower_photos</pre>
+<p>The preceding command should display the following objects:</p>
+<pre>daisy/
+dandelion/
+roses/
+sunflowers/
+tulip/
+LICENSE.txt</pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="(Re)training the network" duration="5">
+        <h2>Configure your MobileNet</h2>
+<p>In this exercise, we will retrain a <a href="https://research.googleblog.com/2017/06/mobilenets-open-source-models-for.html" target="_blank">MobileNet</a>. MobileNet is a a small efficient convolutional neural network. &#34;Convolutional&#34; just means that the same calculations are performed at each location in the image.</p>
+<p>The MobileNet is configurable in two ways:</p>
+<ul>
+<li>Input image resolution: 128,160,192, or 224px. Unsurprisingly, feeding in a higher resolution image takes more processing time, but results in better classification accuracy.</li>
+<li>The relative size of the model as a fraction of the largest MobileNet: 1.0, 0.75, 0.50, or 0.25.  </li>
+</ul>
+<p>We will use 224 0.5 for this codelab. </p>
+<p>With the recommended settings, it typically takes only a couple of minutes to retrain on a laptop. You will pass the settings inside Linux shell variables. Set those variables in your shell: </p>
+<pre>IMAGE_SIZE=224
+ARCHITECTURE=&#34;mobilenet_0.50_${IMAGE_SIZE}&#34;</pre>
+<h3>More about MobileNet performance (optional)</h3>
+<p>The graph below shows the first-choice-accuracies of these configurations (y-axis), vs the number of calculations required (x-axis), and the size of the model (circle area). </p>
+<p>16 points are shown for MobileNet. For each of the 4 model sizes (circle area in the figure) there is one point for each image resolution setting. The 128px image size models are represented by the lower-left point in each set, while the 224px models are in the upper right.   </p>
+<p>Other notable architectures are also included for reference. &#34;GoogleNet&#34; in this figure is <a href="https://github.com/tensorflow/models/tree/master/research/slim#pre-trained-models" target="_blank">&#34;Inception V1&#34; in this table</a>. An extended version of this figure is available in <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture9.pdf" target="_blank">slides 84-89 here</a>.</p>
+<p><img style="max-width: 624.00px" src="img/70170cbb89d318b1.png"></p>
+<h2>Start TensorBoard</h2>
+<p>Before starting the training, launch <code>tensorboard</code> in the background. TensorBoard is a monitoring and inspection tool included with tensorflow. You will use it to monitor the training progress.</p>
+<pre>tensorboard --logdir tf_files/training_summaries &amp;</pre>
+<aside class="warning"><p>This command will fail with the following error if you already have a tensorboard process running:<br><br><code>ERROR:tensorflow:TensorBoard attempted to bind to port 6006, but it was already in use</code></p>
+<p>You can kill all existing TensorBoard instances with:</p>
+<p><code>pkill -f &#34;tensorboard&#34;</code></p>
+</aside>
+<h2>Investigate the retraining script</h2>
+<p>The retrain script is from the <a href="https://github.com/tensorflow/hub/blob/master/examples/image_retraining/retrain.py" target="_blank">TensorFlow Hub repo</a>, but it is not installed as part of the <code>pip</code> package. So for simplicity I&#39;ve included it in the codelab repository. You can run the script using the <code>python</code> command. Take a minute to skim its &#34;help&#34;.</p>
+<pre>python -m scripts.retrain -h</pre>
+<h2>Run the training</h2>
+<p>As noted in the introduction, ImageNet models are networks with millions of parameters that can differentiate a large number of classes.  We&#39;re only training the final layer of that network, so training will end in a reasonable amount of time.</p>
+<p>Start your retraining with one big command (note the <code>--summaries_dir</code> option, sending training progress reports to the directory that tensorboard is monitoring) :</p>
+<pre>python -m scripts.retrain \
+  --bottleneck_dir=tf_files/bottlenecks \
+  --how_many_training_steps=500 \
+  --model_dir=tf_files/models/ \
+  --summaries_dir=tf_files/training_summaries/&#34;${ARCHITECTURE}&#34; \
+  --output_graph=tf_files/retrained_graph.pb \
+  --output_labels=tf_files/retrained_labels.txt \
+  --architecture=&#34;${ARCHITECTURE}&#34; \
+  --image_dir=tf_files/flower_photos</pre>
+<p>Note that this step will take a while.</p>
+<p>This script downloads the pre-trained model, adds a new final layer, and trains that layer on the flower photos you&#39;ve downloaded. <br></p>
+<aside class="warning"><p>If you are using Docker and the above command fails reporting:<br><br><code>ERRO[XXXX] error getting events from daemon: EOF</code></p>
+<p>You have likely encountered <a href="https://github.com/moby/moby/issues/31220" target="_blank">this bug</a>. Increase your Docker cpu allocation to 4 or more, on OSX you can set this by selecting &#34;Preferences...&#34; from the Docker menu, the setting is on the &#34;advanced&#34; tab.</p>
+</aside>
+<p>ImageNet does not include any of these flower species we&#39;re training on here. However, the kinds of information that make it possible for ImageNet to differentiate among 1,000 classes are also useful for distinguishing other objects.  By using this pre-trained network, we are using that information as input to the final classification layer that distinguishes our flower classes.</p>
+<aside class="special"><p>Note: The rest of this section is not <em>essential</em>. If your model is done training and and you want to see how it did, feel free to skip ahead.<br><br>&#34;Training And TensorBoard&#34; will show you how to check your progress in tensorboard.</p>
+<p>&#34;Using the Retrained Model&#34; will show you how to try the retrained model.</p>
+</aside>
+<h3>Optional: I&#39;m NOT in a hurry!</h3>
+<p>The first retraining command iterates only 500 times. You can <strong>very likely get improved results (i.e. higher accuracy) by training for longer</strong>.  To get this improvement, remove the parameter <code>--how_many_training_steps</code> to use the default 4,000 iterations.</p>
+<pre>python -m scripts.retrain \
+  --bottleneck_dir=tf_files/bottlenecks \
+  --model_dir=tf_files/models/&#34;${ARCHITECTURE}&#34; \
+  --summaries_dir=tf_files/training_summaries/&#34;${ARCHITECTURE}&#34; \
+  --output_graph=tf_files/retrained_graph.pb \
+  --output_labels=tf_files/retrained_labels.txt \
+  --architecture=&#34;${ARCHITECTURE}&#34; \
+  --image_dir=tf_files/flower_photos</pre>
+<h2>More about Bottlenecks (Optional)</h2>
+<p><em>This section and the next provide background on how this retraining process works.</em></p>
+<p>The first phase analyzes all the images on disk and calculates the bottleneck values for each of them. What&#39;s a bottleneck?</p>
+<p><img style="max-width: 624.00px" src="img/ce5329e698bcd707.png"></p>
+<p>These ImageNet models are made up of many layers stacked on top of each other, a simplified picture of Inception V3 from TensorBoard, is shown above (all the details are available <a href="http://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf" target="_blank">in this paper</a>, with a complete picture on page 6). These layers are pre-trained and are already very valuable at finding and summarizing information that will help classify most images. For this codelab, you are training only the last layer (<code>final_training_ops</code> in the figure below). While all the previous layers retain their already-trained state. </p>
+<p><img style="max-width: 536.05px" src="img/84a6154ed64fd0fb.png"></p>
+<p>In the above figure, the node labeled &#34;softmax&#34;, on the left side, is the output layer of the original model. While all the nodes to the right of the &#34;softmax&#34; were added by the retraining script.</p>
+<aside class="special"><p>The above figure is a screenshot from tensorboard. <a href="http://0.0.0.0:6006/#graphs" target="_blank">You can open TensorBoard in your browser</a>, to get a better look at it. You will find it in the &#34;Graphs&#34; tab. <br><br>Note that this will only work after the retrain script finished generating the &#34;bottleneck&#34; files.</p>
+</aside>
+<p>A <strong>bottleneck</strong> is an informal term we often use for the layer just before the final output layer that actually does the classification. &#34;Bottleneck&#34; is not used to imply that the layer is slowing down the network. We use the term bottleneck because near the output, the representation is much more compact than in the main body of the network. </p>
+<p>Every image is reused multiple times during training. Calculating the layers behind the bottleneck for each image takes a significant amount of time. Since these lower layers of the network are not being modified their outputs can be cached and reused.</p>
+<p>So the script is running the constant part of the network, everything below the node labeled <code>Bottlene...</code> above, and caching the results.</p>
+<p>The command you ran saves these files to the <code>bottlenecks/</code> directory. If you rerun the script, they&#39;ll be reused, so you don&#39;t have to wait for this part again.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Training And TensorBoard (Optional)" duration="5">
+        <p>Once the script finishes generating all the bottleneck files, the actual training of the final layer of the network begins.</p>
+<p>By default, this script runs 4,000 training steps. Each step chooses 10 images at random from the training set, finds their bottlenecks from the cache, and feeds them into the final layer to get predictions. Those predictions are then compared against the actual labels, and the results of this comparison is used to update the final layer&#39;s weights through a backpropagation process. </p>
+<p>As it trains, you&#39;ll see a series of step outputs, each one showing training accuracy, validation accuracy, and the cross entropy: </p>
+<ul>
+<li>The <strong>training accuracy</strong> shows the percentage of the images used in the current training batch that were labeled with the correct class. </li>
+<li><strong>Validation accuracy</strong>: The validation accuracy is the precision (percentage of correctly-labelled images) on a randomly-selected group of images from a different set. </li>
+<li><strong>Cross entropy</strong> is a loss function that gives a glimpse into how well the learning process is progressing. (Lower numbers are better.)</li>
+</ul>
+<p>The figures below show an example of the progress of the model&#39;s accuracy and cross entropy as it trains. If your model has finished generating the bottleneck files you can check your model&#39;s progress by  <a href="http://0.0.0.0:6006/" target="_blank">opening TensorBoard</a>, and clicking on the figure&#39;s name to show them.  Ignore any warnings that TensorBoard prints to your command line.</p>
+<p>The first figure shows accuracy (y-axis) as a function of training progress (x-axis):</p>
+<p><img style="max-width: 624.00px" src="img/bc758910e1c6eee7.png"></p>
+<p><img style="max-width: 127.00px" src="img/ee5d91da57a84831.png"></p>
+<p>Two lines are shown. The orange line shows the accuracy of the model on the training data. While the blue line shows the accuracy on the test set (which was not used for training). This is a much better measure of the true performance of the network. If the training accuracy continues to rise while the validation accuracy decreases then the model is said to be &#34;overfitting&#34;. Overfitting is when the model begins to memorize the training set instead of understanding general patterns in the data.</p>
+<p>As the process continues, you should see the reported accuracy improve. After all the training steps are complete, the script runs a final test accuracy evaluation on a set of images that are kept separate from the training and validation pictures. This test evaluation provides the best estimate of how the trained model will perform on the classification task. </p>
+<p>You should see an accuracy value of between 85% and 99%, though the exact value will vary from run to run since there&#39;s randomness in the training process. (If you are only training on two classes, you should expect higher accuracy.) This number value indicates the percentage of the images in the test set that are given the correct label after the model is fully trained.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Using the Retrained Model" duration="5">
+        <p>The retraining script writes data to the following two files:</p>
+<ul>
+<li><code>tf_files/retrained_graph.pb</code>, which contains a version of the selected network with a final layer retrained on your categories.</li>
+<li><code>tf_files/retrained_labels.txt</code>, which is a text file containing labels. </li>
+</ul>
+<h2>Classifying an image</h2>
+<p>The codelab repo also contains a copy of tensorflow&#39;s <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/label_image/label_image.py" target="_blank">label_image.py</a> example, which you can use to test your network. Take a minute to read the help for this script:</p>
+<pre>python -m scripts.label_image -h</pre>
+<p>Now, let&#39;s run the script on this image of a daisy:</p>
+<p><img style="max-width: 231.00px" src="img/3021186b83bc90c2.png"></p>
+<p><code>flower_photos/daisy/21652746_cc379e0eea_m.jpg</code></p>
+<p> Image CC-BY by Retinafunk</p>
+<pre>python -m scripts.label_image \
+    --graph=tf_files/retrained_graph.pb  \
+    --image=tf_files/flower_photos/daisy/21652746_cc379e0eea_m.jpg</pre>
+<p>Each execution will print a list of flower labels, in most cases with the correct flower on top (though each retrained model may be slightly different).</p>
+<aside class="warning"><p>If you chose a mobilenet that takes a smaller input size, then be sure to set the <code>--input_size</code> flag using the shell variable you set earlier. </p>
+<p><code>--input_size=${IMAGE_SIZE}</code></p>
+</aside>
+<p>You might get results like this for a daisy photo:</p>
+<pre>daisy (score = 0.99071)
+sunflowers (score = 0.00595)
+dandelion (score = 0.00252)
+roses (score = 0.00049)
+tulips (score = 0.00032)</pre>
+<p>This indicates a high confidence (~99%) that the image  is a daisy, and low confidence for any other label.</p>
+<p>You can use <code>label_image.py</code> to classify any image file you choose, either from your downloaded collection, or new ones. You just have to change the <code>--image</code> file name argument to the script.</p>
+<p><img style="max-width: 320.00px" src="img/28cf1a230dc7c51f.png"></p>
+<p><code>flower_photos/roses/2414954629_3708a1a04d.jpg</code> </p>
+<p>Image CC-BY by Lori Branham</p>
+<pre>python -m scripts.label_image \
+    --graph=tf_files/retrained_graph.pb  \
+    --image=tf_files/flower_photos/roses/2414954629_3708a1a04d.jpg </pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Trying Other Hyperparameters (Optional)" duration="0">
+        <p>The retraining script has several other command line options you can use.</p>
+<p>You can read about these options in the help for the retrain script:</p>
+<pre>python -m scripts.retrain -h</pre>
+<p>Try adjusting some of these options to see if you can increase the final validation accuracy. </p>
+<p>For example, the <code>--learning_rate</code> parameter controls the magnitude of the updates to the final layer during training. So far we have left it out, so the program has used the default <code>learning_rate</code>  value of <code>0.01</code>. If you specify a small <code>learning_rate</code>, like <code>0.005</code>, the training will take longer, but the overall precision might increase. Higher values of <code>learning_rate</code>, like <code>1.0</code>, could train faster, but typically reduces precision, or even makes training unstable.</p>
+<p>You need to experiment carefully to see what works for your case.</p>
+<aside class="special"><p>It is very helpful for this type of work if you give each experiment a unique name, so they show up as separate entries in TensorBoard.</p>
+<p>It&#39;s the <code>--summaries_dir</code> option that controls the name in tensorboard. Earlier we used:</p>
+<p><code>  --summaries_dir=training_summaries/basic</code></p>
+<p>TensorBoard is monitoring the contents of the <code>training_summaries</code> directory,  so setting <code>--summarys_dir</code> to <code>training_summaries</code> or any subdirectory of <code>training_summaries</code> will work. </p>
+<p>You may want to set the following two options together, so your results are clearly labeled:</p>
+<p><code>--learning_rate=0.5</code><br>  <code>--summaries_dir=training_summaries/LR_0.5</code><br>  </p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Training on Your Own Categories (Optional)" duration="0">
+        <p>After you see the script working on the flower example images, you can start looking at teaching the network to recognize different categories. </p>
+<p>In theory, all you need to do is run the tool, specifying a particular set of sub-folders. Each sub-folder is named after one of your categories and contains only images from that category. </p>
+<p>If you complete this step and pass the root folder of the subdirectories as the argument for the <code>--image_dir</code> parameter, the script should train the images that you&#39;ve provided, just like it did for the flowers.</p>
+<p>The classification script uses the folder names as label names, and the images inside each folder should be pictures that correspond to that label, as you can see in the flower archive:</p>
+<p><img style="max-width: 624.00px" src="img/9444bbae4d5d9ab1.png"></p>
+<p>Collect as many pictures of each label as you can and try it out!</p>
+<aside class="special"><p>Yufeng Guo used these techniques to make his <a href="https://youtu.be/EnFyneRScQ8?t=4m17s" target="_blank">candy sorter demo</a>. One shortcut he used was to split the training images out of videos of objects from each category, using <a href="http://stackoverflow.com/questions/10957412/fastest-way-to-extract-frames-using-ffmpeg" target="_blank">ffmpeg</a>.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Next steps" duration="0">
+        <p>Congratulations, you&#39;ve taken your first steps into a larger world of deep learning!</p>
+<p>You can see more about using TensorFlow at the <a href="https://www.tensorflow.org" target="_blank">TensorFlow website</a> or the TensorFlow GitHub<a href="https://github.com/tensorflow/" target="_blank"> project</a>. There are lots of other resources available for TensorFlow, including a <a href="https://groups.google.com/a/tensorflow.org/forum/#!forum/discuss" target="_blank">discussion group</a> and <a href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45166.pdf" target="_blank">whitepaper</a>.</p>
+<p>If you&#39;re interested in running TensorFlow on mobile devices try the second part of this tutorial: There are three versions:</p>
+<ol type="1" start="1">
+<li><a href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2-tflite" target="_blank">TFLite Android</a></li>
+<li><a href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2-ios" target="_blank">TFLite iOS</a></li>
+<li><a href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2" target="_blank">TFMobile Android</a></li>
+</ol>
+<p>Or just go have some fun in the <a href="http://playground.tensorflow.org" target="_blank">TensorFlow Playground</a>!</p>
+<p><em>This codelab is based on Pete Warden&#39;s </em><a href="https://petewarden.com/2016/02/28/tensorflow-for-poets/" target="_blank"><em>TensorFlow for Poets</em></a><em> blog post and this </em><a href="https://www.tensorflow.org/tutorials/image_retraining" target="_blank"><em>retraining tutorial</em></a><em>.</em></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = 'UA-77265754-1';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

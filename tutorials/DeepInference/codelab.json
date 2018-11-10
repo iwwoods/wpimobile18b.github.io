@@ -1,0 +1,23 @@
+{
+  "environment": "web",
+  "source": "DeepInference.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2018-11-10T11:15:11-05:00",
+  "id": "DeepInference",
+  "duration": 0,
+  "title": "CS4518 Android Application Deep Inference Tutorial",
+  "author": "Sam Ogden",
+  "summary": "CS4518 Android Deep Inference Tutorial",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "deep learning",
+    "cloud"
+  ],
+  "tags": [],
+  "url": "DeepInference"
+}

@@ -1,0 +1,433 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>CS4518 Android Application Deep Inference Tutorial</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="CS4518 Android Application Deep Inference Tutorial"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Overview of Tutorial" duration="0">
+        <p>In this tutorial we&#39;ll be getting to the really fun stuff: incorporating <strong>mobile deep inference</strong> to our Android applications.</p>
+<p>Deep Inference is using a deep learning model for some tasks.  In this case we&#39;ll be using an <a href="https://github.com/tensorflow/models/tree/master/research/inception" target="_blank">InceptionV3</a> for the task of image classification.  This model is one of the most accurate available models available when run on the <a href="http://www.image-net.org/" target="_blank">ImageNet Challenege dataset</a>, a standard test of image classification accuracy.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Setup" duration="0">
+        <p>First we&#39;re going to design a GUI.  After that we will collect a number of photos to use for inference.</p>
+<h2>Designing our GUI</h2>
+<p>Our tutorial app will have a number of pictures stored locally that it will use as inputs to deep inference.  We want it to display this pictures and the results of the inference so we can see whether we think it is accurate.  In addition, we can display how long it took for the inference to be done so we can begin tracking some metrics.</p>
+<p>To do this we need four parts to our GUI.</p>
+<ol type="1">
+<li>An imageview so we can display the image</li>
+<li>A button to click to get the next one running</li>
+<li>A textview for displaying the classification results</li>
+<li>A textview for displaying the time taken for the the inference<br><br><ul>
+<li>Note: technically we could put both of these together but let&#39;s keep our lives easy, right?</li>
+</ul>
+</li>
+<li>A button declaring whether we should do on or off-device inference</li>
+</ol>
+<p>This will make a GUI that is extremely similar to what we had in the UI tutorial so put it together, making sure to give everything reasonable names.</p>
+<p><img alt="How your GUI should look after setting it up" src="img/31c2d6e2972bb104.png"></p>
+<h2>Adding photos to your app</h2>
+<p>Again, just like in the first tutorial we want to get a set of photos, this time for testing on.</p>
+<p>Just like last time right click and navigate New &gt; Folder &gt; Assets Folder to create a new assets folder.  Unlike last time, after your assets folder is created, right click on it and select &#34;Reveal in Finder&#34; (or whatever your OS equivalent is).  Create a new directory named &#34;imgs&#34; and add your images here.  This will be faster than adding through android studio since there is no confirmation screen.</p>
+<p><img alt="Assets folder structure with images" src="img/af0ae6c30fdda9ee.png"></p>
+<h3>What photos to add</h3>
+<p>The ImageNet classification dataset contains 1000 different categories.  You can take a quick look at it <a href="https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a#file-imagenet1000_clsid_to_human-txt-L3" target="_blank">here</a> and see that it contains many different types of things, ranging from ‘European fire salamander&#39; to ‘water bottle&#39;.</p>
+<p>This means that you can pick a wide range of photos and see how well the model does in recognizing them.  It can be interesting to pick a range of pictures that may confuse the network.  For instance,</p>
+<p><img alt="Example photo of a jet and a swing set (I assume after a hurricane)" src="img/64b6be42f62e400e.jpg"></p>
+<h3>Setting up the code hooks</h3>
+<p>Since we are modeling this app largely on our first app we want to set the initial code hooks the same way.  That is, display a picture upon loading and then whenever the &#34;Change Picture!&#34; button is clicked, change to a random picture.<br>In the next section we&#39;ll eventually be using this click to be starting inference.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Prepping for on-device inference" duration="0">
+        <h2>Getting models to use for inference</h2>
+<p>The first step using deep learning on your mobile is to get a model to use.  This can be either training your own from scratch, fine-tuning an existing model or downloading a pretrained model.  The first two methods are beyond the scope of this tutorial but for those interested <a href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/#0" target="_blank">TensorFlow for Poets</a> is a great resource.</p>
+<p>Instead, we will be downloading a pre-trained TensorFlowLite InceptionV3 model from Google.  The direct link for the model is <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_v3_2018_04_27.tgz" target="_blank">here</a>, which is from the Inception_V3 entry from the &#34;Image Classification (Float Models)&#34; at <a href="https://www.tensorflow.org/lite/models" target="_blank">this</a>.</p>
+<p>Either way, the direct link (<a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_v3_2018_04_27.tgz" target="_blank">here</a>) will download a *.tgz file.  Unzip this file and move the contents to a folder called &#34;model&#34; in your assets folder.</p>
+<p><img alt="Assets folder structure with models" src="img/d389dfdba96713bf.png"></p>
+<h3>Quick background on Deep Learning model formats</h3>
+<p>If you look at the downloaded model package and the table linked above you might notice that there are a number of different file extensions (.tflite vs. .pb) as well as model kind (‘float&#39; vs ‘quantized&#39;).  These represent different model formats and ways of compressing the resulting files.</p>
+<p>The original model format for TensorFlow is the protobuf file (.pb extension) which contains the definitions of layers within the model and, in the case of ‘frozen&#39; models, their weights.  (In non-‘frozen&#39; models weights are stored in a separate file).  These protobufs could be used within TensorFlow and the frozen varient could be used on either a computer or mobile device.  Recently, TensorFlow introduced TensorFlowLite files (.tflite extension) which is optimized for mobile devices.  We will be using these in our application.</p>
+<p>The difference between ‘float&#39; and ‘quantized&#39; versions of a model file are how well they can be compressed.  In ‘float&#39; versions weights are stored as floats which allows for maximal accuracy of results.  ‘Quantized&#39; models have had these float values replaced with an integer approxiation which decreases accuracy slightly (although not as much as you may assume) which increasing compressibility of the model by introducing repetition in the file.  This allows for lower storage requirements and in some cases faster loading.</p>
+<h2>Updating up our gradle</h2>
+<p>To use TensorFlowLite we need to let Android Studio know that we will be using it.  Therefore we need to add a line letting Android Studio know to compile and add in tensorflow-lite.<br>To do this add <code>compile &#39;org.tensorflow:tensorflow-lite:+&#39;</code> to your app gradle file and resync.</p>
+<aside class="warning"><p>Note, gradle syncing can lead to some errors popping up about versions.  Try to fix them as best as you can – Android Studio is generally fairly good at highlighting what issues exist, although their error messages may be somewhat crytic.</p>
+</aside>
+<p>In addition due to how tflite files are loaded we need to ensure that they are not compressed when stored.  Therefore add the following to your gradle as well, under the <code>android{...}</code> header:</p>
+<pre><code>aaptOptions {
+    noCompress &#34;tflite&#34;
+    noCompress &#34;lite&#34;
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Coding for on-device inference" duration="0">
+        <p>Okay!  So now we have more or less all the backend stuff set up.  We have models loaded onto device (and not compressed!), we have our grale updated to compile tensorflow-lite and we know a bit about how deep learning models are stored in TensorFlow.</p>
+<p>Next we need to actually code them up!</p>
+<p>Luckily, the actual inference boils down to just two lines.<br>Unluckily, there is a bit of extra code needed to get everything in the right format, but this isn&#39;t all that difficult.  These are part of the optimizations that are done for TensorFlowLite so it&#39;s worth it in the end.</p>
+<h2>Running our tensorflow-lite model</h2>
+<p>Let&#39;s skip ahead of ourselves quickly and give a quick preview of how to use a TensorFlowLite model.  This will help because it is, at its core super simple.</p>
+<p>If we have a TensorFlowLite model loaded into a variable called ‘tflite&#39; then we call it with just:</p>
+<pre><code>tflite.run(imgData, labelProbArray);
+</code></pre>
+<p><code>imgData</code> is the input image data and <code>labelProbArray</code> is an array that is equal in size to the number of possible classes.  After the call <code>labelProbArray</code> contains the probability that an image is classified as a particular entry.</p>
+<p>Super simple, right?  So let&#39;s get to how to set it up.</p>
+<h2>Setting up our model</h2>
+<p>Setting up our model for inference is super easy.  We just need to create a new Interpreter object which we can pass inputs to.  We do this by passing it a MappedByteBuffer object, as below.</p>
+<pre><code>MappedByteBuffer tfliteModel = loadModelFile()
+Interpreter tflite = new Interpreter(tfliteModel);
+</code></pre>
+<p>But wait.  How do we get this MappedByteBuffer file?<br>Well, that&#39;s one of the slightly tricky parts I mentioned before.  Essentially a MappedByteBuffer is a chunk of memory that is more quickly readable than other objects so it helps us use the model faster.  For the model we load this using the below function:</p>
+<pre><code>private MappedByteBuffer loadModelFile() throws IOException {
+    AssetFileDescriptor fileDescriptor = getAssets().openFd(getModelPath());
+    FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
+    FileChannel fileChannel = inputStream.getChannel();
+    long startOffset = fileDescriptor.getStartOffset();
+    long declaredLength = fileDescriptor.getDeclaredLength();
+    return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
+}
+</code></pre>
+<p>There&#39;s one more function that you need to define, <code>getModelPath()</code>, which is the path to your model in the assets folder.  While you can hardcode it, leaving it as a function allows you to have more flexibility in the future.</p>
+<h2>Setting up our image data</h2>
+<p>With a similar eye towards speed, our image file needs to be loaded into a ByteBuffer file.  We do this in a two step process.</p>
+<ol type="1">
+<li>Load file into a bitmap object<br><br><ul>
+<li>This is important as deep networks generally only read bitmaps, and it means the object size is highly regular</li>
+</ul>
+</li>
+<li>Convert the bitmap to a Direct ByteBuffer.</li>
+</ol>
+<h3>Loading the bitmap</h3>
+<p>The loading of the bitmap can be done just like we do when setting the picture in the ImageView in the app.<br>There is one catch though: You need to resize the bitmap.  This can be done using the <code>createScaledBitmap(...)</code> function.</p>
+<aside class="special"><p>Every deep learning network that works on images has its own settings for input datasize.  Most CNNs take in an image a square bitmap image.<br><em>Inception has an input size of 299x299x3, where 3 is the number of colors.</em>  It is very important that when you resize the bitmap you resize it to this size or else you&#39;ll get some strange looking errors.</p>
+</aside>
+<h3>Converting the bitmap to a ByteBuffer</h3>
+<p>The first step is to create a Direct ByteBuffer.  We should have this be a global variable and only allocate this once or else we lose many of its advantages.  Therefore, in your <code>onCreate(...)</code> function you want to allocate it similar to below:</p>
+<pre><code>imgData = ByteBuffer.allocateDirect(
+                        DIM_BATCH_SIZE
+                                * SIZE_X
+                                * SIZE_Y
+                                * DIM_PIXEL_SIZE
+                                * NUM_BYTES_PER_CHANNEL);
+</code></pre>
+<p>Let&#39;s quickly walk through what these variables are.</p>
+<ul>
+<li><em>DIM_BATCH_SIZE</em> is the number of images we&#39;re submitting for inference at a time.  In this case we&#39;re only submitting 1.</li>
+<li><em>SIZE_X</em> and <em>SIZE_Y</em> are the size of the input window and as discussed earlier should be 299</li>
+<li><em>DIM_PIXEL_SIZE</em> is how many channels there are per pixel, which in our case is 3</li>
+<li><em>NUM_BYTES_PER_CHANNEL</em> is how many bytes each pixel is stored as in our bitmap.  Since we&#39;ll be using a float based bitmap this is 4.</li>
+</ul>
+<p>Okay, so now that our ByteBuffer is allocated let&#39;s read some data into it!<br>We do this pixel by pixel.  I&#39;m giving you the code to do so below to ensure that the order is correct as it could be a hassle.<br>One extra function is also included, <code>addPixelValue(...)</code>.  This function is meant to do some pre-processining on the input image to ensure the average and standard deviation of brightness are similar to how the model was trained.  If nothing else, deep learning is fincky.  For InceptionV3 IMAGE_MEAN = 128 and IMAGE_STD = 128.0.</p>
+<pre><code>private void convertBitmapToByteBuffer(Bitmap bitmap) {
+    int[] intValues = new int[SIZE_X * SIZE_Y];
+
+    if (imgData == null) {
+        return;
+    }
+    imgData.rewind();
+    bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+    // Convert the image to floating point.
+    int pixel = 0;
+    for (int i = 0; i &lt; SIZE_X; ++i) {
+        for (int j = 0; j &lt; SIZE_Y; ++j) {
+            final int val = intValues[pixel++];
+            addPixelValue(val);
+        }
+    }
+}
+protected void addPixelValue(int pixelValue) {
+    imgData.putFloat((((pixelValue &gt;&gt; 16) &amp; 0xFF) - IMAGE_MEAN) / IMAGE_STD);
+    imgData.putFloat((((pixelValue &gt;&gt; 8) &amp; 0xFF) - IMAGE_MEAN) / IMAGE_STD);
+    imgData.putFloat(((pixelValue &amp; 0xFF) - IMAGE_MEAN) / IMAGE_STD);
+}
+</code></pre>
+<p>Once you call the <code>convertBitmapToByteBuffer(...)</code> function on your resized bitmap you should be ready to do some inference!</p>
+<h2>Setting up your response array</h2>
+<p>There are two arrays that we need to set up for dealing with our responses.  The first is our labels file.  This file is located in our assets folder and can be read in.  Each line should be a separate entry in an array of strings.<br>The second is an empty float array for that is passed to the inference function and written as the results of the inference.  What is written in each element is the percentage chance, in the range [0.0, 1.0), that class is what is in the image.  Therefore, this should be an array of shape [DIM_BATCH_SIZE][NUM_CLASSES].  In the example code I refer to this array as <code>labelProbArray</code>.</p>
+<h2>Running inference!</h2>
+<p>Now we&#39;re all set to run inference!  We have our model, <code>tflite</code>, our input image data, <code>imgData</code>, and our array for results, <code>labelProbArray</code>!  Let&#39;s do this!</p>
+<p>For inference we just call....</p>
+<pre><code>tflite.run(imgData, labelProbArray);
+</code></pre>
+<p>It&#39;s almost underwhelming, right?  That&#39;s the advantage of having everything else already set up, though.</p>
+<h2>Processing results</h2>
+<p>After we call <code>run(...)</code> we now have a <code>labelProbArray</code> that contains probabilities of various classes.  What does that mean exactly?<br>Well, it means that if we look at a given entry it is the confidence of the network that that the label corresponding to that entry is the correct image.</p>
+<p>For example, if we ignore the DIM_BATCH_SIZE dimension, since it will be 1 in our tutorial, if we have an array with the entries <code>[ 0.1 0.1 0.8]</code> and a list of labels of <code>[&#39;cat&#39;, &#39;dog&#39;, &#39;peacock&#39;]</code> it means that the model thinks that it is 80% sure that the image contains a peacock, while it admits there is a 10% change that it contains a cat or a dog.</p>
+<p>What does that mean for us?  It means that we look at which entry of <code>labelProbArray</code> contains the highest value, and thus the highest confidence, and find the label that shares that index.  That&#39;s what our model things the image is of!</p>
+<p>Using this we can update the UI using the same techniques we used in tutorial 1 to get something similar to below.</p>
+<p><img alt="Inference Application using local inference" src="img/c531bb2bc42ef881.png"></p>
+<h2>One last thing!</h2>
+<p>You might notice that I&#39;ve also update the time label that we set up way back when we set up our GUI. It looks pretty cool, right?<br>You should add one too!</p>
+<p>Using the <code>SystemClock.uptimeMillis()</code> function you can track the start time and end time of inference (including image loading and processing!) and calculate this value yourself.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Off device inference" duration="0">
+        <p>Phew, that was a lot!  Good job!<br>Now that we have on-device inference set up we are going to set up off-device inference.  I&#39;ve set up a custom server at <code>http://35.243.243.163:54321/inception</code> that takes JPEGs as input and uses the same inception model we&#39;re using on-device for inference.<br><br>This means that all we need to do is sent a POST request with our image.  Although this is easy there are a few complications we need to work through. It won&#39;t be hard, though!</p>
+<p>But first there&#39;s some setup!</p>
+<h2>Updating support files</h2>
+<p>There are two main support files that we need to update.</p>
+<p>First we need to update the manifest to include permissions for our app to access the internet.  We do this by adding the line <code>&lt;uses-permission android:name=&#34;android.permission.INTERNET&#34;/&gt;</code>.</p>
+<p>The next file we need to update is the gradle file to include the library we&#39;re going to use for the POST requests.  In this case, we&#39;re going to be using okhttp, an HTTP library for android.  To include this library add the line <code>compile &#39;com.squareup.okhttp:okhttp:2.5.0&#39;</code>, just like we did for tensorflow-lite.</p>
+<p>This should set us up to get to programming our call!</p>
+<h2>Sending a POST request</h2>
+<p>First, we need to define our server location.  As I&#39;ve said, I set up a custom server. Let&#39;s make the location of it as a global so it&#39;s easy to find and change if need be.</p>
+<pre><code>    private String hosturl = &#34;http://35.243.243.163:54321/inception&#34;;
+</code></pre>
+<p>Now that we have a server, we need to set up our call to this server.  There are three parts to this.<br>First, we need to create a RequestBody object that includes the file we want to send.<br>Second, We need to build a request with this request body.<br>Third, and finally, we need to send this request.</p>
+<p>These calls can be a little bit annoying to string together so I&#39;m putting them below.</p>
+<pre><code>RequestBody requestBody = new MultipartBuilder()
+                .type(MultipartBuilder.FORM)
+                .addFormDataPart(&#34;file&#34;, filename, RequestBody.create(MEDIA_TYPE_JPEG, file))
+                .build();
+
+Request request = new Request.Builder()
+        .url(hosturl)
+        .post(requestBody)
+        .build();
+        
+Response response = client.newCall(request).execute();
+</code></pre>
+<p><em>There is one catch.</em>  You can&#39;t actually send a file directly from the assets folder where it is currently stored.  Therefore to get the <code>filename</code> that you&#39;re sending, you need to read the file from assets and save it as a file to a readable location.  This is left for you to do!</p>
+<h2>There is one catch....</h2>
+<p>You can&#39;t run HTTP requests on the main UI thread in Android.  You can try but you&#39;ll get a a nasty looking error as soon as you kick off inference.  You might&#39;ve already tried and seen this error, if so then nice initiative!</p>
+<p>This is something of a problem, but getting around it isn&#39;t particularly different.  We just need to do the inference as an AsyncTask.</p>
+<p>This sounds daunting but we just need to set up a nested class that extends AsyncTask and has at very least a single <code>doInBackground(...)</code> function.  I&#39;ve incldued the general outline below, with two extra functions that may prove useful.</p>
+<pre><code>    private class RunInferenceAsync extends AsyncTask&lt;String, Float, Long&gt; {
+        String results;
+        String time;
+
+        protected void onPreExecute() {
+            // Stuff to do before inference starts
+        }
+
+        protected Long doInBackground(String... img_files) {
+
+            String img_path = img_files[0];
+            
+            // Do inference here!
+            
+            return null;
+        }
+
+        protected void onPostExecute(Long result){
+            // Stuff to do after inference ends
+        }
+
+    }
+</code></pre>
+<p>Once you have this class you simply call <code>new RunInferenceAsync().execute(photo)</code> and it will kick off this task in the background!</p>
+<p>Now that you have this function you have all the tools to use remote inference as well!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Pulling it all together!" duration="0">
+        <p>Okay, now you have the tools for on-device and off-device inference!  You also have the basis for doing inference on a different thread than on the UI thread.  If you&#39;ve been watching the console when running your app you might&#39;ve noticed it complaining about skipping frames and doing too much work on the UI slide.</p>
+<p>How about using the AsyncTask to make both inferences run in the background?</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Setting up your own server" duration="0">
+        <p>Earlier I set up a custom server for you to use for your off-device inference.  I did this using Google Compute Engine (GCE) and a Flask server that would accept an image file and perform inference on it using the InceptionV3 model that we had been using on-device.<br>To enable you to host your own server, potentially with a different model, I&#39;ll give a quick overview of how to set up your own Flask server and then deploy it to either GCE or AWS.</p>
+<p>Although I won&#39;t go into the details of how to perform inference with TensorFlow, it is a simple extension of the server and so should be easy to figure out.</p>
+<h2>A simple Flask server</h2>
+<p>Flask provides a simple python server.  Although it&#39;s not able to do provide complicated functionality such as file serving or adding much security it gives us a quick and easy python-based solution for writing a server front-end.  It can also provide all the hooks needed to be used by nginx or apache servers, which are much more full-featured.</p>
+<h3>Setting up your application</h3>
+<p>The first step in setting up a Flask server is to set up the app that you&#39;ll be serving.  You do this with a simple line at the top of your file (after imports, before anything other functions) creating it:</p>
+<pre><code>app = flask.Flask(__name__)
+</code></pre>
+<p>This is also a good time to set up configuration details, such as <code>app.config[&#39;UPLOAD_FOLDER&#39;]</code> which may prove useful later on.</p>
+<p>Next, you can start your server by adding the command <code>app.run(host=&#34;0.0.0.0&#34;, port=int(&#34;54321&#34;), debug=True)</code> which will start a server on localhost on port 54321.  Therefore to access it you should go to <a href="http://localhost:54321" target="_blank">http://localhost:54321</a>.</p>
+<p>However, currently you have no endpoints for this app to use so it will simply give you an error.</p>
+<p><img alt="Flask server with no endpoints" src="img/a1ac317577335a51.png"></p>
+<h3>Setting up endpoints</h3>
+<p>The idea behind setting up endpoints in Flask is that you identify which functions you want to be run when various paths are requested from the server.  These functions need to return the source of the page that we want to visit, which can be as simple as just a string.<br>You mark which function you want to run, and what methods can be used to access it, with the <code>@[app_name].route([path], methods=[methods list])</code> decorator.</p>
+<p>For instance, to add a helloworld page located at <code>/hello</code> we can add the below code between where we define our <code>app</code> and where we run out server.</p>
+<pre><code>@app.route(&#39;/hello&#39;,methods=[&#39;GET&#39;, &#39;POST&#39;])
+def helloWorldFunc():
+    return &#34;Hello world!&#34;
+</code></pre>
+<p>We can now restart our server and check out our new webpage at <a href="http://localhost:54321/hello" target="_blank">http://localhost:54321/hello</a></p>
+<p><img alt="Flask server with our Hello World endpoint enabled" src="img/348e8ec3eed37b71.png"></p>
+<h3>Working with requests</h3>
+<p>Now that we have our first endpoint set up, we need to figure out what we want to do with it.  This means looking at the specifics of the request.<br>We do this by working with the flask.request object that is automatically generated with each request.  We can, for instance, access its ‘method&#39; field to determine what kind of method the request used.  Below you can see the updated helloWorldFunc that takes this into account and changes its message.</p>
+<pre><code>@app.route(&#39;/hello&#39;,methods=[&#39;GET&#39;])
+def helloWorldFunc():
+    if flask.request.method == &#39;POST&#39;:
+        return &#34;Hello Post!&#34;
+    elif flask.request.method == &#39;GET&#39;:
+        return &#34;Hello Get!&#34;
+    else:
+        return &#34;Hello world!&#34;
+</code></pre>
+<p>You can also access the files within a request by using <code>flask.request.files[...]</code> where you give it the name the file is stored under.  In the case of our app this was ‘file&#39;.</p>
+<h3>Going further with Flask</h3>
+<p>This is just the basic introduction to Flask.  You can also call other functions like you would any other python code.  This makes it easy to quickly implement front ends for our functions.</p>
+<p>Using this you can quickly set up a serving platform where an image is uploaded and inference is run on it.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Deploying your server!" duration="0">
+        <p>Now that you have a server you need to send some data to it.  While you can test it on your local computer this isn&#39;t an idea situation for a number of reasons.  Instead, let&#39;s get some experience setting up a server in the cloud that we can use.  First we&#39;ll run through setting up a server on</p>
+<h2>Google Computer Engine (GCE)</h2>
+<p>Google provides cloud-based servers that you can get to through the Google Compute Engine <a href="https://cloud.google.com/compute/" target="_blank">Homepage</a>.  From here click the &#34;Go to Console&#34; button.</p>
+<h3>Setting up a new instance</h3>
+<p>The page that opens should be the &#34;VM Instances&#34; page that contains a list of all of your running VMs, at this point likely it is empty.  To create a new VM click &#34;Create Instance&#34; at the top of the page to begin a process of setting up a VM.</p>
+<p><img alt="New VM instance on GCE" src="img/9ef619d20dbe9c8a.png"></p>
+<p>This will bring up a new page.  It will likely offer you the choice to take a tutorial or to set up a new VM from scratch (unfortunately I can&#39;t get a picture of this since I&#39;ve already set one up).  Feel free to step through the tutorial first, so you have a sense of how it works, but to continue with this tutorial chose to set up a new VM from scratch.</p>
+<p>This page will give you the option to customize your VM.  You can change a lot of things on this page but there are three things that you should make sure you do.</p>
+<p>First, change the name of you VM to something recognizable, like cs4518-example.<br>Second, change the bootdisk of your VM to an image with TensorFlow pre-installed, such as the &#34;Intel® optimized Deep Learning Image: TensorFlow 1.11.0&#34; image.  This will help you if you are serving any deep learning model.<br>Finally, navigate to the Networking tab under &#34;Management, security, disks, networking, sole tenancy&#34; where under the &#34;Network Tags&#34; you should add &#34;flask-server&#34;.  This is to enable us to open the appropriate ports for our server in a few steps.</p>
+<p><img alt="Flask Server network tag" src="img/b4c1500077d4d288.png"></p>
+<p>Once you have all the settings how you want them click &#34;Create&#34; at the bottom of the page and you&#39;ll have a new VM to use!</p>
+<h3>Setting up the network for serving!</h3>
+<p>Next step is to set up the ports that we&#39;ll be using for accessing our VM while serving.  To do this Use the sidebar menu to navigate to &#34;VPC network&#34; and then &#34;Firewall rules&#34;.</p>
+<p><img alt="Firewall Rules in Console" src="img/2cbe51064d28615f.png"></p>
+<p>To create a new rule you need to click the big &#34;CREATE FIREWALL RULE&#34; at the top of the page which will bring up a dialogue to make a new rule.  The big things to change are:</p>
+<ol type="1">
+<li>Give it a name and optionally a description to you know what it does</li>
+<li>Set &#34;Source IP ranges&#34; to 0.0.0.0/0.  This is on the permissive side as it allows access from all IPs, and you may want to consider shutting it down a bit if you know your subnet slice information.</li>
+<li>Add &#34;flask-server&#34; to the &#34;Target tags&#34; field.  This allows any VM with this tag to interact with the outside world.</li>
+<li>Under &#34;Protocols and ports&#34; add our port to the &#34;tcp&#34; field.  In our example so far this has been port 54321.</li>
+</ol>
+<p>After you have these set up just click &#34;Create&#34; and your new rule will go live.</p>
+<h3>Connecting to your new VM and running your server</h3>
+<p>Head back to your VM instances page (&#34;Google Cloud Platform&#34; &gt; &#34;Compute Engine&#34; &gt; &#34;VM instances&#34;), and click the &#34;SSH&#34; button on the far right side of your instance name under &#34;Connect&#34;.  This will pop up a browser based ssh terminal (nifty, eh?).</p>
+<p>Once you have this terminal run the command <code>tmux</code>.  This command opens a virtual terminal that will stay open even if the ssh session closes.  This means that any commands you start will continue running even after you close the window.</p>
+<p>After this, copy your flask server code to your VM instance.  There are a number of ways to do this, such as SCP or google file transfer techniques.  However, the easiest may to be to use your favorite text editor, such as Vim, and copy and paste your code over.</p>
+<p>Finally, just run your script and your server should be running.</p>
+<h3>Querying your server</h3>
+<p>Back on your &#34;VM instances&#34; page you can find the IP of your website.  This is under the &#34;External IP&#34; column.  Enter this followed by your port and the path of your endpoint.  You should see your endpoint displayed!</p>
+<p><img alt="Finished GCE page!" src="img/243beaadbfa472d3.png"></p>
+<h2>Amazon Web Services (AWS)</h2>
+<p>As an alternative let&#39;s quickly look at how to deploy a server to AWS.  To start go to the <a href="https://aws.amazon.com/" target="_blank">AWS Homepage</a> and click the &#34;Sign In to the Console&#34; button in the upper right corner.</p>
+<h3>Navigating the console</h3>
+<p>The AWS console homepage is a list of all the the available services AWS offers, which is a [confusingly] large number of services.  The one we are looked for is called simply &#34;EC2&#34;.  You can find it either under the &#34;Compute&#34; heading or via the search bar.  When you clikc it it will take it to a page like the one below.</p>
+<p><img alt="EC2 Homepage" src="img/55ba0757cc40a69a.png"></p>
+<p>From this page click &#34;Launch Instance&#34; and you&#39;ll be brought to a new page to customize your instance.</p>
+<h3>Picking your Machine Image</h3>
+<p>The first step in setting up your server is to pick the kind of instance you want to use.  There is a wide range available, including both a basic Ubuntu server to specialized databases.<br>To make getting TensorFlow easier there is a Deep Learning specialized instance that has TensorFlow, and other frameworks, set up for the particular machines.  You can access this AMI under the &#34;Community AMIs&#34; tab where it&#39;s name is &#34;Deep Learning AMI (Ubuntu) Version&#34;</p>
+<p><img alt="AWS Deep Learning AMI V16.0" src="img/141ff2ff0551b44f.png"></p>
+<p>Select the AMI and this will take you to the next page</p>
+<h3>Picking your Instance Type</h3>
+<p>If you thought were a lot of options below there&#39;s even more now.  But don&#39;t worry, they&#39;re relatively simple!<br>Amazon organizes their images by machine types and then the relative sizes within those groupings.  For instance, <code>t2</code> instance are general purpose servers with a balance of aproximately 1CPU:2GB memory.  <code>t2.small</code> has 1CPU and 2GB memory while a <code>t2.2xlarge</code> has 8CPUs and 32GB of memory.</p>
+<p>There are also other groups such as <code>p2</code> and <code>p3</code> machines which have GPUs (and are much more expensive!), <code>f1</code> machines which have FPGAs attached.</p>
+<p>For now choose a <code>t2.micro</code> instance as it is possible to use these for free if you are in your first year of using AWS.  It should also be pre-selected.</p>
+<p>Click the &#34;Next: Configure Instance Details&#34; button.</p>
+<h3>Configure Instance Details</h3>
+<p>This page allows you to set the details for your instance, such as the number of instances you are actually requesting and which network to use.  For this page just click &#34;Next: Add Storage&#34;</p>
+<h3>Add Storage</h3>
+<p>This page allows you to add or remove storage form your instance.  If you are using the deep learning AMI it will likely default to 75GB.  If not, I would recommend a minimum of 10-15GB.</p>
+<p>Click &#34;Next: Add Tags&#34;</p>
+<h3>Add Tags</h3>
+<p>On this page you can add tags to group your instances.  These tags could be something like &#34;CLASS: CS4518&#34; but aren&#39;t required.</p>
+<p>Click &#34;Next: Configure Security Group&#34;</p>
+<h3>Configure Security Group</h3>
+<p>Finally we&#39;ll do something on this page!<br>On this page we will set rules for access through the firewall that Amazon provides for our instance.  We group these rules into &#34;Security Groups&#34; and can be used on various machines.  This is very similar to how we did it on GCE, just using a different interface.</p>
+<p>You can see that one rule already exists in this group, allowing SSH access to any IP through port 22.  We&#39;re going to augment this to also allow access through port 54321.</p>
+<p>First things first, change the &#34;Security group name&#34; to something more descriptive so you can find this group again.  I&#39;m setting mine to &#34;CS4518 server&#34;.<br>Next, click &#34;Add Rule&#34; and a new row should be created.  In this new row change the &#34;Port Range&#34; field to &#34;54321&#34;, the &#34;Source&#34; to &#34;0.0.0.0/0&#34; (or select &#34;anywhere&#34; from the dropdown menu&#34;) and give it a simple description.  An example can be seen below.</p>
+<p><img alt="Security Groups in AWS" src="img/e6fd3ea4a7c65058.png"></p>
+<aside class="special"><p>As with GCE you can cut down access to your server if you can specify your subnet with higher accuracy.</p>
+</aside>
+<p>Once you have your port added click &#34;Review and Launch&#34; and you&#39;ll be taken to a summary page.</p>
+<h3>Review Instance Launch</h3>
+<p>This page gives an overall summary of your server.  Click &#34;Launch&#34;.</p>
+<p>When you click launch AWS will ask you to create an SSH key to use to connect to your server.  You can use an existing key or create a new one which you will have to download to your computer.<br><em>Make sure that when you download this key you save it in a safe place is it not only allows access to your server but cannot be regenerated.</em></p>
+<aside class="special"><p>Typically on *nix systems ssh keys, such as this *.pem file, are stored in <code>~/.ssh</code> so you can store this key there for safe keeping.</p>
+</aside>
+<p>After you have your key generated and stored in a safe place click &#34;Launch Instances&#34; and your instances will be started.</p>
+<p>After this you will be taken to a &#34;Launch Status&#34; page where you can select &#34;View Instances&#34;.  Click this and it will take you to your Instance page in the AWS console.</p>
+<h3>AWS Instances and connecting</h3>
+<p>On this page we can see all of our instances as well as details on them.  I obviously have quite a few that I use, as you can see below.  Therefore it can help to give your instance a name.  To do this hover over the Name column of your instance and click on the little pencil.  Fill in a name such as &#34;CS4518 Server&#34; so you can easily identify it.</p>
+<p><img alt="Instances in AWS" src="img/e927ba5bcddefd5f.png"></p>
+<p>After you do this select your instance with the checkbox on the left side of its row and then click the connect button.  You can use either a standard SSH client, which has instructions provided in this window, or if you&#39;re not using chrome then you can use a browser based client.</p>
+<p>Follow these instructions to connect to your server.  Two common issues you may run into are the permissions on your *.pem file, which AWS explains how to fix, and that you need to put in the path to your *.pem file as your terminal will not automatically discover it for you the first time.  You will also need to add the RSA fingerprint when it prompts you to do so.</p>
+<p>Once you&#39;re connected to the instance you&#39;ll see something like the below, assuming you chose the Deep Learning image.</p>
+<p><img alt="Deep learning AMI welcome screen" src="img/b2a25a3ef8f87b28.png"></p>
+<h3>Using your AWS Instance</h3>
+<p>Using this instance is very similar to how we used our GCE instance, but with a few extra steps.</p>
+<p>The first step is to run <code>tmux</code> to get a shell that won&#39;t be stopped when the ssh connection stops.<br>Next, run <code>source activate tensorflow_p27</code> to enter the virtual environment with TensorFlow for python2.7 established.  This will take a few minutes but if you are running TensorFlow in the background is very helpful, especially if you are using a GPU enabled server as it makes sure the TensorFlow installation is as optimized as possible.</p>
+<p>Once this initialization is completed run &#34;pip install flask&#34; to install flask on your instance.</p>
+<p>Finally, just like in GCE, copy your script to the server and run it.</p>
+<h3>Accessing our server</h3>
+<p>To find the DNS or IP associated with our instance we go back to the Instance view in the AWS console.  Once you&#39;ve selected your instance this information should appear at the bottom of the page.  You can easily copy it by clicking the icon that appears when you hover over it, or highlighting it.</p>
+<p><img alt="Location of public IP and DNS in Instance console" src="img/b2a25a3ef8f87b28.png"></p>
+<p><img alt="Our server in AWS!" src="img/53dce4023e6bb2cf.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Summary" duration="0">
+        <p>Okay!  That was a whirlwind of topics!  We covered:</p>
+<ol type="1">
+<li>On-device inference with TensorFlowLite</li>
+<li>Off-device inference with a pre-deployed server</li>
+<li>Flask web platform for quick-and-dirty servers</li>
+<li>Google Computer Engine servers</li>
+<li>Amazon Web Services servers</li>
+</ol>
+<p>Phew!<br>But we made it!  Congratulations!  Have fun developing your own deep learning projects!</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

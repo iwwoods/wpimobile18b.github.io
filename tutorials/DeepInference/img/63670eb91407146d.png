@@ -1,0 +1,2167 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://assets-cdn.github.com">
+  <link rel="dns-prefetch" href="https://avatars0.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://avatars1.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://avatars2.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://avatars3.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://github-cloud.s3.amazonaws.com">
+  <link rel="dns-prefetch" href="https://user-images.githubusercontent.com/">
+
+
+
+  <link crossorigin="anonymous" media="all" integrity="sha512-wTTqmxYgVetC9399S4yH2TVoV8rVTOV7yHAWKhn0L+ya2eHNLiao7GuMGRx9iBEu83NpKtJibZrlMyYDYXYC0Q==" rel="stylesheet" href="https://assets-cdn.github.com/assets/frameworks-dd10d63b72c3bc48412f78fba535547a.css" />
+  <link crossorigin="anonymous" media="all" integrity="sha512-kFfNRgIn1u64ZXJCJuapQrT+swDqJCZyDE8FyycxOkQwpRuzlK6arRw/Pr0VqffhmPLao0XQoV/ym85wD4hq6A==" rel="stylesheet" href="https://assets-cdn.github.com/assets/github-c7ab4bcd2bbc288bc8d02dbe7fa373fa.css" />
+  
+  
+  <link crossorigin="anonymous" media="all" integrity="sha512-QbxBZqAu/zl5DDhd2QizVMJEVzg31c5Mlqi5uPXG9U7GQFnAk64qWU/ngS64iYhFycI93jHr5hLoAIWvTswe4w==" rel="stylesheet" href="https://assets-cdn.github.com/assets/site-d5d073510fa15e2c00f1b636632a01ff.css" />
+  
+  
+
+  <meta name="viewport" content="width=device-width">
+  
+  <title>models/research/inception at master · tensorflow/models · GitHub</title>
+    <meta name="description" content="Models and examples built with TensorFlow. Contribute to tensorflow/models development by creating an account on GitHub.">
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
+  <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+  <meta property="fb:app_id" content="1401488693436528">
+
+    
+    <meta property="og:image" content="https://avatars2.githubusercontent.com/u/15658638?s=400&amp;v=4" /><meta property="og:site_name" content="GitHub" /><meta property="og:type" content="object" /><meta property="og:title" content="tensorflow/models" /><meta property="og:url" content="https://github.com/tensorflow/models" /><meta property="og:description" content="Models and examples built with TensorFlow. Contribute to tensorflow/models development by creating an account on GitHub." />
+
+  <link rel="assets" href="https://assets-cdn.github.com/">
+  
+  <meta name="pjax-timeout" content="1000">
+  
+  <meta name="request-id" content="E184:1F18:2F124D3:57E95D9:5BE6014C" data-pjax-transient>
+
+
+  
+
+  <meta name="selected-link" value="repo_source" data-pjax-transient>
+
+      <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+    <meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
+    <meta name="google-site-verification" content="GXs5KoUUkNCoaAZn7wPN-t01Pywp9M3sEjnt_3_ZWPc">
+
+  <meta name="octolytics-host" content="collector.githubapp.com" /><meta name="octolytics-app-id" content="github" /><meta name="octolytics-event-url" content="https://collector.githubapp.com/github-external/browser_event" /><meta name="octolytics-dimension-request_id" content="E184:1F18:2F124D3:57E95D9:5BE6014C" /><meta name="octolytics-dimension-region_edge" content="iad" /><meta name="octolytics-dimension-region_render" content="iad" />
+<meta name="analytics-location" content="/&lt;user-name&gt;/&lt;repo-name&gt;/files/disambiguate" data-pjax-transient="true" />
+
+
+
+    <meta name="google-analytics" content="UA-3769691-2">
+
+
+<meta class="js-ga-set" name="dimension1" content="Logged Out">
+
+
+
+  
+
+      <meta name="hostname" content="github.com">
+    <meta name="user-login" content="">
+
+      <meta name="expected-hostname" content="github.com">
+    <meta name="js-proxy-site-detection-payload" content="ZGM3ODMxYjI2NWEyMjE4ZjU2ZWE4ZmUwMmVlNTU1YmY5N2I0ZGVkZjcyZTllNTE4NWIwOTU2MGM2NzI2ZWI2Ynx7InJlbW90ZV9hZGRyZXNzIjoiMTMwLjIxNS4xMjQuNDMiLCJyZXF1ZXN0X2lkIjoiRTE4NDoxRjE4OjJGMTI0RDM6NTdFOTVEOTo1QkU2MDE0QyIsInRpbWVzdGFtcCI6MTU0MTgwMDI2OCwiaG9zdCI6ImdpdGh1Yi5jb20ifQ==">
+
+    <meta name="enabled-features" content="DASHBOARD_V2_LAYOUT_OPT_IN,EXPLORE_DISCOVER_REPOSITORIES,UNIVERSE_BANNER,MARKETPLACE_PLAN_RESTRICTION_EDITOR">
+
+  <meta name="html-safe-nonce" content="333e87475390278eb8a14c64b7ddb22846396abb">
+
+  <meta http-equiv="x-pjax-version" content="73df2a5f11941f058717a87c1e994155">
+  
+
+      <link href="https://github.com/tensorflow/models/commits/master.atom" rel="alternate" title="Recent Commits to models:master" type="application/atom+xml">
+
+  <meta name="go-import" content="github.com/tensorflow/models git https://github.com/tensorflow/models.git">
+
+  <meta name="octolytics-dimension-user_id" content="15658638" /><meta name="octolytics-dimension-user_login" content="tensorflow" /><meta name="octolytics-dimension-repository_id" content="51117837" /><meta name="octolytics-dimension-repository_nwo" content="tensorflow/models" /><meta name="octolytics-dimension-repository_public" content="true" /><meta name="octolytics-dimension-repository_is_fork" content="false" /><meta name="octolytics-dimension-repository_network_root_id" content="51117837" /><meta name="octolytics-dimension-repository_network_root_nwo" content="tensorflow/models" /><meta name="octolytics-dimension-repository_explore_github_marketplace_ci_cta_shown" content="false" />
+
+
+    <link rel="canonical" href="https://github.com/tensorflow/models/tree/master/research/inception" data-pjax-transient>
+
+
+  <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+
+  <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+
+  <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#000000">
+  <link rel="icon" type="image/x-icon" class="js-site-favicon" href="https://assets-cdn.github.com/favicon.ico">
+
+<meta name="theme-color" content="#1e2327">
+
+
+
+  <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials">
+
+  </head>
+
+  <body class="logged-out env-production">
+    
+
+  <div class="position-relative js-header-wrapper ">
+    <a href="#start-of-content" tabindex="1" class="px-2 py-4 bg-blue text-white show-on-focus js-skip-to-content">Skip to content</a>
+    <div id="js-pjax-loader-bar" class="pjax-loader-bar"><div class="progress"></div></div>
+
+    
+    
+    
+
+
+
+        
+<header class="Header header-logged-out  position-relative f4 py-3" role="banner">
+  <div class="container-lg d-flex px-3">
+    <div class="d-flex flex-justify-between flex-items-center">
+      <a class="header-logo-invertocat my-0" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+        <svg height="32" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+
+    </div>
+
+    <div class="HeaderMenu d-flex flex-justify-between flex-auto">
+        <nav class="mt-0">
+          <ul class="d-flex list-style-none">
+              <li class="ml-2">
+                <a class="js-selected-navigation-item HeaderNavlink px-0 py-2 m-0" data-ga-click="Header, click, Nav menu - item:features" data-selected-links="/features /features/project-management /features/code-review /features/project-management /features/integrations /features" href="/features">
+                  Features
+</a>              </li>
+              <li class="ml-4">
+                <a class="js-selected-navigation-item HeaderNavlink px-0 py-2 m-0" data-ga-click="Header, click, Nav menu - item:business" data-selected-links="/business /business/security /business/customers /business" href="/business">
+                  Business
+</a>              </li>
+
+              <li class="ml-4">
+                <a class="js-selected-navigation-item HeaderNavlink px-0 py-2 m-0" data-ga-click="Header, click, Nav menu - item:explore" data-selected-links="/explore /trending /trending/developers /integrations /integrations/feature/code /integrations/feature/collaborate /integrations/feature/ship showcases showcases_search showcases_landing /explore" href="/explore">
+                  Explore
+</a>              </li>
+
+              <li class="ml-4">
+                    <a class="js-selected-navigation-item HeaderNavlink px-0 py-2 m-0" data-ga-click="Header, click, Nav menu - item:marketplace" data-selected-links=" /marketplace" href="/marketplace">
+                      Marketplace
+</a>              </li>
+              <li class="ml-4">
+                <a class="js-selected-navigation-item HeaderNavlink px-0 py-2 m-0" data-ga-click="Header, click, Nav menu - item:pricing" data-selected-links="/pricing /pricing/developer /pricing/team /pricing/business-hosted /pricing/business-enterprise /pricing" href="/pricing">
+                  Pricing
+</a>              </li>
+          </ul>
+        </nav>
+
+      <div class="d-flex">
+          <div class="d-lg-flex flex-items-center mr-3">
+            <div class="header-search scoped-search site-scoped-search js-site-search position-relative js-jump-to"
+  role="combobox"
+  aria-owns="jump-to-results"
+  aria-label="Search or jump to"
+  aria-haspopup="listbox"
+  aria-expanded="false"
+>
+  <div class="position-relative">
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="js-site-search-form" data-scope-type="Repository" data-scope-id="51117837" data-scoped-search-url="/tensorflow/models/search" data-unscoped-search-url="/search" action="/tensorflow/models/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+      <label class="form-control header-search-wrapper header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center js-chromeless-input-container">
+        <input type="text"
+          class="form-control header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+          data-hotkey="s,/"
+          name="q"
+          value=""
+          placeholder="Search"
+          data-unscoped-placeholder="Search GitHub"
+          data-scoped-placeholder="Search"
+          autocapitalize="off"
+          aria-autocomplete="list"
+          aria-controls="jump-to-results"
+          aria-label="Search"
+          data-jump-to-suggestions-path="/_graphql/GetSuggestedNavigationDestinations#csrf-token=SiHp/wfHTXQYZm7kO5MaEpid+EBISVfZoeigJXB2UTL5UoWVavtB4FT/5T5ivV+WfuwmzNsR3kmiGRFVLM+PEQ=="
+          spellcheck="false"
+          autocomplete="off"
+          >
+          <input type="hidden" class="js-site-search-type-field" name="type" >
+            <img src="https://assets-cdn.github.com/images/search-shortcut-hint.svg" alt="" class="mr-2 header-search-key-slash">
+
+            <div class="Box position-absolute overflow-hidden d-none jump-to-suggestions js-jump-to-suggestions-container">
+              <ul class="d-none js-jump-to-suggestions-template-container">
+                <li class="d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item" role="option">
+                  <a tabindex="-1" class="no-underline d-flex flex-auto flex-items-center p-2 jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open" href="">
+                    <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center d-none">
+                      <svg height="16" width="16" class="octicon octicon-repo flex-shrink-0 js-jump-to-octicon-repo d-none" title="Repository" aria-label="Repository" viewBox="0 0 12 16" version="1.1" role="img"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"/></svg>
+                      <svg height="16" width="16" class="octicon octicon-project flex-shrink-0 js-jump-to-octicon-project d-none" title="Project" aria-label="Project" viewBox="0 0 15 16" version="1.1" role="img"><path fill-rule="evenodd" d="M10 12h3V2h-3v10zm-4-2h3V2H6v8zm-4 4h3V2H2v12zm-1 1h13V1H1v14zM14 0H1a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/></svg>
+                      <svg height="16" width="16" class="octicon octicon-search flex-shrink-0 js-jump-to-octicon-search d-none" title="Search" aria-label="Search" viewBox="0 0 16 16" version="1.1" role="img"><path fill-rule="evenodd" d="M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z"/></svg>
+                    </div>
+
+                    <img class="avatar mr-2 flex-shrink-0 js-jump-to-suggestion-avatar d-none" alt="" aria-label="Team" src="" width="28" height="28">
+
+                    <div class="jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+                    </div>
+
+                    <div class="border rounded-1 flex-shrink-0 bg-gray px-1 text-gray-light ml-1 f6 d-none js-jump-to-badge-search">
+                      <span class="js-jump-to-badge-search-text-default d-none" aria-label="in this repository">
+                        In this repository
+                      </span>
+                      <span class="js-jump-to-badge-search-text-global d-none" aria-label="in all of GitHub">
+                        All GitHub
+                      </span>
+                      <span aria-hidden="true" class="d-inline-block ml-1 v-align-middle">↵</span>
+                    </div>
+
+                    <div aria-hidden="true" class="border rounded-1 flex-shrink-0 bg-gray px-1 text-gray-light ml-1 f6 d-none d-on-nav-focus js-jump-to-badge-jump">
+                      Jump to
+                      <span class="d-inline-block ml-1 v-align-middle">↵</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+              <ul class="d-none js-jump-to-no-results-template-container">
+                <li class="d-flex flex-justify-center flex-items-center p-3 f5 d-none">
+                  <span class="text-gray">No suggested jump to results</span>
+                </li>
+              </ul>
+
+              <ul id="jump-to-results" role="listbox" class="js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container" >
+                <li class="d-flex flex-justify-center flex-items-center p-0 f5">
+                  <img src="https://assets-cdn.github.com/images/spinners/octocat-spinner-128.gif" alt="Octocat Spinner Icon" class="m-2" width="28">
+                </li>
+              </ul>
+            </div>
+      </label>
+</form>  </div>
+</div>
+
+          </div>
+
+        <span class="d-inline-block">
+            <div class="HeaderNavlink px-0 py-2 m-0">
+              <a class="text-bold text-white no-underline" href="/login?return_to=%2Ftensorflow%2Fmodels%2Ftree%2Fmaster%2Fresearch%2Finception" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+                <span class="text-gray">or</span>
+                <a class="text-bold text-white no-underline" href="/join?source=header-repo" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
+            </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</header>
+
+  </div>
+
+  <div id="start-of-content" class="show-on-focus"></div>
+
+    <div id="js-flash-container">
+
+
+</div>
+
+
+
+  <div role="main" class="application-main " data-organization-hovercards-enabled>
+        <div itemscope itemtype="http://schema.org/SoftwareSourceCode" class="">
+    <div id="js-repo-pjax-container" data-pjax-container >
+      
+
+
+
+  
+
+
+
+  <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav  ">
+    <div class="repohead-details-container clearfix container">
+
+      <ul class="pagehead-actions">
+  <li>
+      <a href="/login?return_to=%2Ftensorflow%2Fmodels"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-s"
+    aria-label="You must be signed in to watch a repository" rel="nofollow">
+    <svg class="octicon octicon-eye v-align-text-bottom" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"/></svg>
+    Watch
+  </a>
+  <a class="social-count" href="/tensorflow/models/watchers"
+     aria-label="2728 users are watching this repository">
+    2,728
+  </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Ftensorflow%2Fmodels"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-s"
+    aria-label="You must be signed in to star a repository" rel="nofollow">
+    <svg class="octicon octicon-star v-align-text-bottom" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"/></svg>
+    Star
+  </a>
+
+    <a class="social-count js-social-count" href="/tensorflow/models/stargazers"
+      aria-label="44153 users starred this repository">
+      44,153
+    </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Ftensorflow%2Fmodels"
+        class="btn btn-sm btn-with-count tooltipped tooltipped-s"
+        aria-label="You must be signed in to fork a repository" rel="nofollow">
+        <svg class="octicon octicon-repo-forked v-align-text-bottom" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+        Fork
+      </a>
+
+    <a href="/tensorflow/models/network/members" class="social-count"
+       aria-label="26658 users forked this repository">
+      26,658
+    </a>
+  </li>
+</ul>
+
+      <h1 class="public ">
+  <svg class="octicon octicon-repo" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"/></svg>
+  <span class="author" itemprop="author"><a class="url fn" rel="author" data-hovercard-type="organization" data-hovercard-url="/orgs/tensorflow/hovercard" href="/tensorflow">tensorflow</a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong itemprop="name"><a data-pjax="#js-repo-pjax-container" href="/tensorflow/models">models</a></strong>
+
+</h1>
+
+    </div>
+    
+<nav class="reponav js-repo-nav js-sidenav-container-pjax container"
+     itemscope
+     itemtype="http://schema.org/BreadcrumbList"
+     role="navigation"
+     data-pjax="#js-repo-pjax-container">
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a class="js-selected-navigation-item selected reponav-item" itemprop="url" data-hotkey="g c" aria-current="page" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches repo_packages /tensorflow/models" href="/tensorflow/models">
+      <svg class="octicon octicon-code" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"/></svg>
+      <span itemprop="name">Code</span>
+      <meta itemprop="position" content="1">
+</a>  </span>
+
+    <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+      <a itemprop="url" data-hotkey="g i" class="js-selected-navigation-item reponav-item" data-selected-links="repo_issues repo_labels repo_milestones /tensorflow/models/issues" href="/tensorflow/models/issues">
+        <svg class="octicon octicon-issue-opened" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"/></svg>
+        <span itemprop="name">Issues</span>
+        <span class="Counter">1,002</span>
+        <meta itemprop="position" content="2">
+</a>    </span>
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a data-hotkey="g p" itemprop="url" class="js-selected-navigation-item reponav-item" data-selected-links="repo_pulls checks /tensorflow/models/pulls" href="/tensorflow/models/pulls">
+      <svg class="octicon octicon-git-pull-request" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 10 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v6.56A1.993 1.993 0 0 0 2 15a1.993 1.993 0 0 0 1-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+      <span itemprop="name">Pull requests</span>
+      <span class="Counter">313</span>
+      <meta itemprop="position" content="3">
+</a>  </span>
+
+
+    <a data-hotkey="g b" class="js-selected-navigation-item reponav-item" data-selected-links="repo_projects new_repo_project repo_project /tensorflow/models/projects" href="/tensorflow/models/projects">
+      <svg class="octicon octicon-project" viewBox="0 0 15 16" version="1.1" width="15" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 12h3V2h-3v10zm-4-2h3V2H6v8zm-4 4h3V2H2v12zm-1 1h13V1H1v14zM14 0H1a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/></svg>
+      Projects
+      <span class="Counter" >2</span>
+</a>
+
+    <a class="js-selected-navigation-item reponav-item" data-hotkey="g w" data-selected-links="repo_wiki /tensorflow/models/wiki" href="/tensorflow/models/wiki">
+      <svg class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"/></svg>
+      Wiki
+</a>
+  <a class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors dependency_graph pulse alerts /tensorflow/models/pulse" href="/tensorflow/models/pulse">
+    <svg class="octicon octicon-graph" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16 14v1H0V0h1v14h15zM5 13H3V8h2v5zm4 0H7V3h2v10zm4 0h-2V6h2v7z"/></svg>
+    Insights
+</a>
+
+</nav>
+
+
+  </div>
+
+<div class="container new-discussion-timeline experiment-repo-nav  ">
+  <div class="repository-content ">
+
+    
+  <div class="file-navigation">
+    
+<div class="select-menu branch-select-menu js-menu-container js-select-menu float-left">
+  <button class=" btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
+    
+    type="button" aria-label="Switch branches or tags" aria-expanded="false" aria-haspopup="true">
+      <i>Branch:</i>
+      <span class="js-select-button css-truncate-target">master</span>
+  </button>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax>
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <svg class="octicon octicon-x js-menu-close" role="img" aria-label="Close" viewBox="0 0 12 16" version="1.1" width="12" height="16"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>
+        <span class="select-menu-title">Switch branches/tags</span>
+      </div>
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="form-control js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
+        </div>
+        <div class="select-menu-tabs" role="tablist">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" data-filter-placeholder="Filter branches/tags" class="js-select-menu-tab" role="tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" data-filter-placeholder="Find a tag…" class="js-select-menu-tab" role="tab">Tags</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches" role="menu">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/YknZhu-patch-1/research/inception"
+               data-name="YknZhu-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                YknZhu-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/a3c_blogpost/research/inception"
+               data-name="a3c_blogpost"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                a3c_blogpost
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/achowdhery-patch-1/research/inception"
+               data-name="achowdhery-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                achowdhery-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/achowdhery-patch-2/research/inception"
+               data-name="achowdhery-patch-2"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                achowdhery-patch-2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/aselle-patch-1/research/inception"
+               data-name="aselle-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                aselle-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/asimshankar-patch-1/research/inception"
+               data-name="asimshankar-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                asimshankar-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/bananabowl-patch-1/research/inception"
+               data-name="bananabowl-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                bananabowl-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/benchmarks/research/inception"
+               data-name="benchmarks"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                benchmarks
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/distrat-prototype/research/inception"
+               data-name="distrat-prototype"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                distrat-prototype
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/feat/acc_thresh/research/inception"
+               data-name="feat/acc_thresh"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                feat/acc_thresh
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/feat/contrib-data/research/inception"
+               data-name="feat/contrib-data"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                feat/contrib-data
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/feat/log-time/research/inception"
+               data-name="feat/log-time"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                feat/log-time
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/feat/multi-gpu-resnet/research/inception"
+               data-name="feat/multi-gpu-resnet"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                feat/multi-gpu-resnet
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/feat/ncf_actual_mlperf_logging/research/inception"
+               data-name="feat/ncf_actual_mlperf_logging"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                feat/ncf_actual_mlperf_logging
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/feat/tensorrt-cr/research/inception"
+               data-name="feat/tensorrt-cr"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                feat/tensorrt-cr
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/feat/tpu_low_level_ncf/research/inception"
+               data-name="feat/tpu_low_level_ncf"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                feat/tpu_low_level_ncf
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/feature/kubeflow-testing/research/inception"
+               data-name="feature/kubeflow-testing"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                feature/kubeflow-testing
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/fix/clear-devices/research/inception"
+               data-name="fix/clear-devices"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                fix/clear-devices
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/fix/codeowners/research/inception"
+               data-name="fix/codeowners"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                fix/codeowners
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/fix/keras_benchmark/research/inception"
+               data-name="fix/keras_benchmark"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                fix/keras_benchmark
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/fix/ncf_eval_default/research/inception"
+               data-name="fix/ncf_eval_default"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                fix/ncf_eval_default
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/fix/ncf_shard_swap_crash/research/inception"
+               data-name="fix/ncf_shard_swap_crash"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                fix/ncf_shard_swap_crash
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/fix/ncf_tpu_keras/research/inception"
+               data-name="fix/ncf_tpu_keras"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                fix/ncf_tpu_keras
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/fix/official_readme/research/inception"
+               data-name="fix/official_readme"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                fix/official_readme
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/fix/quiet_movielens_download/research/inception"
+               data-name="fix/quiet_movielens_download"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                fix/quiet_movielens_download
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/fix/tpu_init_repro/research/inception"
+               data-name="fix/tpu_init_repro"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                fix/tpu_init_repro
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/frankchn-fix-tpu-import/research/inception"
+               data-name="frankchn-fix-tpu-import"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                frankchn-fix-tpu-import
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/guptapriya-synthetic-input/research/inception"
+               data-name="guptapriya-synthetic-input"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                guptapriya-synthetic-input
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/jngiam-bn/research/inception"
+               data-name="jngiam-bn"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                jngiam-bn
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/josh11b-del-is_single_tower/research/inception"
+               data-name="josh11b-del-is_single_tower"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                josh11b-del-is_single_tower
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/josh11b-patch-1/research/inception"
+               data-name="josh11b-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                josh11b-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/josh11b-patch-2/research/inception"
+               data-name="josh11b-patch-2"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                josh11b-patch-2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/josh11b-patch-3/research/inception"
+               data-name="josh11b-patch-3"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                josh11b-patch-3
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/keras-ds/research/inception"
+               data-name="keras-ds"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                keras-ds
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/keras-models/research/inception"
+               data-name="keras-models"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                keras-models
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open selected"
+               href="/tensorflow/models/tree/master/research/inception"
+               data-name="master"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                master
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/mnist_metrics_dtype/research/inception"
+               data-name="mnist_metrics_dtype"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                mnist_metrics_dtype
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/nas-fix-4/research/inception"
+               data-name="nas-fix-4"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                nas-fix-4
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/nst_blogpost/research/inception"
+               data-name="nst_blogpost"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                nst_blogpost
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/peterjliu-patch-1/research/inception"
+               data-name="peterjliu-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                peterjliu-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/qlzh727-patch-1/research/inception"
+               data-name="qlzh727-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                qlzh727-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/qlzh727-patch-2/research/inception"
+               data-name="qlzh727-patch-2"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                qlzh727-patch-2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/r1.4.0/research/inception"
+               data-name="r1.4.0"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                r1.4.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/r1.5/research/inception"
+               data-name="r1.5"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                r1.5
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/r1.6.0/research/inception"
+               data-name="r1.6.0"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                r1.6.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/r1.7.0/research/inception"
+               data-name="r1.7.0"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                r1.7.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/r1.8.0/research/inception"
+               data-name="r1.8.0"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                r1.8.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/r1.8.1/research/inception"
+               data-name="r1.8.1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                r1.8.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/r1.9.0/research/inception"
+               data-name="r1.9.0"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                r1.9.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/r1.10.0/research/inception"
+               data-name="r1.10.0"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                r1.10.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/r1.11/research/inception"
+               data-name="r1.11"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                r1.11
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/random-seed/research/inception"
+               data-name="random-seed"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                random-seed
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/raymond-yuan-patch-1/research/inception"
+               data-name="raymond-yuan-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                raymond-yuan-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/rdp_accountant/research/inception"
+               data-name="rdp_accountant"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                rdp_accountant
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/reed_ncf_patch_12/research/inception"
+               data-name="reed_ncf_patch_12"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                reed_ncf_patch_12
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/reedwm_patch_/research/inception"
+               data-name="reedwm_patch_"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                reedwm_patch_
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/resnet-minor-perf/research/inception"
+               data-name="resnet-minor-perf"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                resnet-minor-perf
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/resnet-perf-2/research/inception"
+               data-name="resnet-perf-2"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                resnet-perf-2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/resnet-perf-simple/research/inception"
+               data-name="resnet-perf-simple"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                resnet-perf-simple
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/resnet-perf/research/inception"
+               data-name="resnet-perf"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                resnet-perf
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/resnet_allocator_repro/research/inception"
+               data-name="resnet_allocator_repro"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                resnet_allocator_repro
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/revert-5566-patch-1/research/inception"
+               data-name="revert-5566-patch-1"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                revert-5566-patch-1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/rnn_ptb/research/inception"
+               data-name="rnn_ptb"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                rnn_ptb
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/segmentation_blogpost/research/inception"
+               data-name="segmentation_blogpost"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                segmentation_blogpost
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/serving_blogpost/research/inception"
+               data-name="serving_blogpost"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                serving_blogpost
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/shizhiw/research/inception"
+               data-name="shizhiw"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                shizhiw
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/shizhiw_20181017/research/inception"
+               data-name="shizhiw_20181017"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                shizhiw_20181017
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/shizhiw_20181026/research/inception"
+               data-name="shizhiw_20181026"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                shizhiw_20181026
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/textsumpy3fix/research/inception"
+               data-name="textsumpy3fix"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                textsumpy3fix
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/tensorflow/models/tree/unified_download/research/inception"
+               data-name="unified_download"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                unified_download
+              </span>
+            </a>
+        </div>
+
+          <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/tensorflow/models/tree/v1.11/research/inception"
+              data-name="v1.11"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.11">
+                v1.11
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/tensorflow/models/tree/v1.10.0/research/inception"
+              data-name="v1.10.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.10.0">
+                v1.10.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/tensorflow/models/tree/v1.9.0/research/inception"
+              data-name="v1.9.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.9.0">
+                v1.9.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/tensorflow/models/tree/v1.8.1/research/inception"
+              data-name="v1.8.1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.8.1">
+                v1.8.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/tensorflow/models/tree/v1.8.0/research/inception"
+              data-name="v1.8.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.8.0">
+                v1.8.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/tensorflow/models/tree/v1.7.0/research/inception"
+              data-name="v1.7.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.0">
+                v1.7.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/tensorflow/models/tree/v.1.6.0/research/inception"
+              data-name="v.1.6.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v.1.6.0">
+                v.1.6.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/tensorflow/models/tree/v1.4.0/research/inception"
+              data-name="v1.4.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.4.0">
+                v1.4.0
+              </span>
+            </a>
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <div class="BtnGroup float-right">
+      
+  <button class="btn btn-sm BtnGroup-item disabled tooltipped tooltipped-n" aria-label="You must be signed in to make or propose changes" type="button">
+    Create new file
+  </button>
+
+
+
+      <a href="/tensorflow/models/find/master" data-pjax data-hotkey="t" class="js-pjax-capture-input btn btn-sm BtnGroup-item empty-icon">
+        Find file
+      </a>
+      <a href="/tensorflow/models/commits/master/research/inception" class="btn btn-sm BtnGroup-item empty-icon tooltipped tooltipped-nw" aria-label="Browse commits for this branch">
+        History
+      </a>
+    </div>
+    <div class="breadcrumb"><span class="repo-root js-repo-root"><span class="js-path-segment"><a data-pjax="true" href="/tensorflow/models"><span>models</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a data-pjax="true" href="/tensorflow/models/tree/master/research"><span>research</span></a></span><span class="separator">/</span><strong class="final-path">inception</strong><span class="separator">/</span></div>
+  </div>
+
+  
+
+
+  <div class="commit-tease js-details-container Details d-flex" data-issue-and-pr-hovercards-enabled>
+    
+<div class="AvatarStack flex-self-start ">
+  <div class="AvatarStack-body" aria-label="nightscape">
+
+        <a class="avatar" data-skip-pjax="true" data-hovercard-type="user" data-hovercard-url="/hovercards?user_id=35170" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="/nightscape">
+          <img height="20" width="20" alt="@nightscape" src="https://avatars2.githubusercontent.com/u/35170?s=60&amp;v=4" />
+</a>  </div>
+</div>
+
+    <div class="flex-auto f6 mr-3">
+      
+      <a href="/tensorflow/models/commits?author=nightscape"
+     class="commit-author tooltipped tooltipped-s user-mention"
+     aria-label="View all commits by nightscape">nightscape</a>
+
+
+  
+
+
+        <a data-pjax="true" title="Fix several Markdown links in slim README" class="message" href="/tensorflow/models/commit/db223fc1b90c591774dca05827150aad8abce689">Fix several Markdown links in slim README</a>
+
+    </div>
+    <div class="no-wrap">
+      Latest commit
+      <a class="commit-tease-sha" href="/tensorflow/models/commit/db223fc1b90c591774dca05827150aad8abce689" data-pjax>
+        db223fc
+      </a>
+      <span itemprop="dateModified"><relative-time datetime="2018-09-11T13:12:32Z">Sep 11, 2018</relative-time></span>
+    </div>
+  </div>
+
+
+
+<div class="file-wrap">
+  <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/tensorflow/models/tree/d7ce21fa4d3b8b204530873ade75637e1313b760/research/inception">Permalink</a>
+
+  <table class="files js-navigation-container js-active-navigation-container" data-pjax>
+      <tr class="up-tree js-navigation-item">
+        <td></td>
+        <td><a rel="nofollow" title="Go to parent directory" class="js-navigation-open" href="/tensorflow/models/tree/master/research">..</a></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+
+    <tbody>
+      <tr class="warning include-fragment-error">
+        <td class="icon"><svg class="octicon octicon-alert" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"/></svg></td>
+        <td class="content" colspan="3">Failed to load latest commit information.</td>
+      </tr>
+
+        <tr class="js-navigation-item">
+          <td class="icon">
+            <svg class="octicon octicon-file-directory" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"/></svg>
+            <img width="16" height="16" class="spinner" alt="" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a class="js-navigation-open" title="g3doc" id="2219d786b81e583d0df76ada6a5e3138-7f0d150118ce6277394d466dbb0718d879ba74a4" href="/tensorflow/models/tree/master/research/inception/g3doc">g3doc</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+                  <a data-pjax="true" title="Move the research models into a research subfolder (#2430)" class="message" href="/tensorflow/models/commit/f87a58cd96d45de73c9a8330a06b2ab56749a7fa">Move the research models into a research subfolder (</a><a class="issue-link js-issue-link" data-error-text="Failed to load issue title" data-id="259585383" data-permission-text="Issue title is private" data-url="https://github.com/tensorflow/models/issues/2430" href="https://github.com/tensorflow/models/pull/2430">#2430</a><a data-pjax="true" title="Move the research models into a research subfolder (#2430)" class="message" href="/tensorflow/models/commit/f87a58cd96d45de73c9a8330a06b2ab56749a7fa">)</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time-ago datetime="2017-09-21T19:58:20Z">Sep 21, 2017</time-ago></span>
+          </td>
+        </tr>
+        <tr class="js-navigation-item">
+          <td class="icon">
+            <svg class="octicon octicon-file-directory" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"/></svg>
+            <img width="16" height="16" class="spinner" alt="" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a class="js-navigation-open" title="inception" id="7adf6f07e0810003c585a7be97868a90-e510eef819ca5d4426514232b8686efcbd461a3a" href="/tensorflow/models/tree/master/research/inception/inception">inception</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+                  <a data-pjax="true" title="Fix several Markdown links in slim README" class="message" href="/tensorflow/models/commit/db223fc1b90c591774dca05827150aad8abce689">Fix several Markdown links in slim README</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time-ago datetime="2018-09-11T13:12:32Z">Sep 11, 2018</time-ago></span>
+          </td>
+        </tr>
+        <tr class="js-navigation-item">
+          <td class="icon">
+            <svg class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"/></svg>
+            <img width="16" height="16" class="spinner" alt="" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a class="js-navigation-open" title=".gitignore" id="a084b794bc0759e7a6b77810e01874f2-58cbf2f4e0d5d39a0e3910d6993508546dad429f" href="/tensorflow/models/blob/master/research/inception/.gitignore">.gitignore</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+                  <a data-pjax="true" title="Move the research models into a research subfolder (#2430)" class="message" href="/tensorflow/models/commit/f87a58cd96d45de73c9a8330a06b2ab56749a7fa">Move the research models into a research subfolder (</a><a class="issue-link js-issue-link" data-error-text="Failed to load issue title" data-id="259585383" data-permission-text="Issue title is private" data-url="https://github.com/tensorflow/models/issues/2430" href="https://github.com/tensorflow/models/pull/2430">#2430</a><a data-pjax="true" title="Move the research models into a research subfolder (#2430)" class="message" href="/tensorflow/models/commit/f87a58cd96d45de73c9a8330a06b2ab56749a7fa">)</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time-ago datetime="2017-09-21T19:58:20Z">Sep 21, 2017</time-ago></span>
+          </td>
+        </tr>
+        <tr class="js-navigation-item">
+          <td class="icon">
+            <svg class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"/></svg>
+            <img width="16" height="16" class="spinner" alt="" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a class="js-navigation-open" title="README.md" id="04c6e90faac2675aa89e2176d2eec7d8-6ee79e31b85f5660e2b715e95fb33bfdd8209565" href="/tensorflow/models/blob/master/research/inception/README.md">README.md</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+                  <a data-pjax="true" title="Make the redirect to slim notice more prominent" class="message" href="/tensorflow/models/commit/8fc75a8e2c2a16370479335f439e3cd301e221b0">Make the redirect to slim notice more prominent</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time-ago datetime="2017-12-21T02:39:51Z">Dec 21, 2017</time-ago></span>
+          </td>
+        </tr>
+        <tr class="js-navigation-item">
+          <td class="icon">
+            <svg class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"/></svg>
+            <img width="16" height="16" class="spinner" alt="" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" />
+          </td>
+          <td class="content">
+            <span class="css-truncate css-truncate-target"><a class="js-navigation-open" title="WORKSPACE" id="09498dbadf45966909850dc8a47ebb13-2d7b4fb254a0fcebe695cb3fd3685af29a02e0b0" href="/tensorflow/models/blob/master/research/inception/WORKSPACE">WORKSPACE</a></span>
+          </td>
+          <td class="message">
+            <span class="css-truncate css-truncate-target">
+                  <a data-pjax="true" title="Move the research models into a research subfolder (#2430)" class="message" href="/tensorflow/models/commit/f87a58cd96d45de73c9a8330a06b2ab56749a7fa">Move the research models into a research subfolder (</a><a class="issue-link js-issue-link" data-error-text="Failed to load issue title" data-id="259585383" data-permission-text="Issue title is private" data-url="https://github.com/tensorflow/models/issues/2430" href="https://github.com/tensorflow/models/pull/2430">#2430</a><a data-pjax="true" title="Move the research models into a research subfolder (#2430)" class="message" href="/tensorflow/models/commit/f87a58cd96d45de73c9a8330a06b2ab56749a7fa">)</a>
+            </span>
+          </td>
+          <td class="age">
+            <span class="css-truncate css-truncate-target"><time-ago datetime="2017-09-21T19:58:20Z">Sep 21, 2017</time-ago></span>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+  <div id="readme" class="Box Box--condensed instapaper_body md">
+    <div class="Box-header px-2 clearfix">
+      <h3 class="Box-title pr-3">
+        <svg class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"/></svg>
+        README.md
+      </h3>
+    </div>
+      <div class="Box-body p-6">
+        <article class="markdown-body entry-content" itemprop="text"><p><strong>NOTE: For the most part, you will find a newer version of this code at <a href="https://github.com/tensorflow/models/tree/master/research/slim">models/research/slim</a>.</strong> In particular:</p>
+<ul>
+<li><code>inception_train.py</code> and <code>imagenet_train.py</code> should no longer be used. The slim editions for running on multiple GPUs are the current best examples.</li>
+<li><code>inception_distributed_train.py</code> and <code>imagenet_distributed_train.py</code> are still valid examples of distributed training.</li>
+</ul>
+<p>For performance benchmarking, please see <a href="https://www.tensorflow.org/performance/benchmarks" rel="nofollow">https://www.tensorflow.org/performance/benchmarks</a>.</p>
+<hr>
+<h1><a id="user-content-inception-in-tensorflow" class="anchor" aria-hidden="true" href="#inception-in-tensorflow"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Inception in TensorFlow</h1>
+<p><a href="http://www.image-net.org/" rel="nofollow">ImageNet</a> is a common academic data set in machine
+learning for training an image recognition system. Code in this directory
+demonstrates how to use TensorFlow to train and evaluate a type of convolutional
+neural network (CNN) on this academic data set. In particular, we demonstrate
+how to train the Inception v3 architecture as specified in:</p>
+<p><em>Rethinking the Inception Architecture for Computer Vision</em></p>
+<p>Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, Zbigniew
+Wojna</p>
+<p><a href="http://arxiv.org/abs/1512.00567" rel="nofollow">http://arxiv.org/abs/1512.00567</a></p>
+<p>This network achieves 21.2% top-1 and 5.6% top-5 error for single frame
+evaluation with a computational cost of 5 billion multiply-adds per inference
+and with using less than 25 million parameters. Below is a visualization of the
+model architecture.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="/tensorflow/models/blob/master/research/inception/g3doc/inception_v3_architecture.png"><img src="/tensorflow/models/raw/master/research/inception/g3doc/inception_v3_architecture.png" alt="Inception-v3 Architecture" style="max-width:100%;"></a></p>
+<h2><a id="user-content-description-of-code" class="anchor" aria-hidden="true" href="#description-of-code"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Description of Code</h2>
+<p>The code base provides three core binaries for:</p>
+<ul>
+<li>Training an Inception v3 network from scratch across multiple GPUs and/or
+multiple machines using the ImageNet 2012 Challenge training data set.</li>
+<li>Evaluating an Inception v3 network using the ImageNet 2012 Challenge
+validation data set.</li>
+<li>Retraining an Inception v3 network on a novel task and back-propagating the
+errors to fine tune the network weights.</li>
+</ul>
+<p>The training procedure employs synchronous stochastic gradient descent across
+multiple GPUs. The user may specify the number of GPUs they wish to harness. The
+synchronous training performs <em>batch-splitting</em> by dividing a given batch across
+multiple GPUs.</p>
+<p>The training set up is nearly identical to the section <a href="https://www.tensorflow.org/tutorials/deep_cnn/index.html#launching_and_training_the_model_on_multiple_gpu_cards" rel="nofollow">Training a Model Using
+Multiple GPU Cards</a>
+where we have substituted the CIFAR-10 model architecture with Inception v3. The
+primary differences with that setup are:</p>
+<ul>
+<li>Calculate and update the batch-norm statistics during training so that they
+may be substituted in during evaluation.</li>
+<li>Specify the model architecture using a (still experimental) higher level
+language called TensorFlow-Slim.</li>
+</ul>
+<p>For more details about TensorFlow-Slim, please see the <a href="/tensorflow/models/blob/master/research/inception/inception/slim/README.md">Slim README</a>. Please note that this higher-level language is still
+<em>experimental</em> and the API may change over time depending on usage and
+subsequent research.</p>
+<h2><a id="user-content-getting-started" class="anchor" aria-hidden="true" href="#getting-started"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting Started</h2>
+<p>Before you run the training script for the first time, you will need to download
+and convert the ImageNet data to native TFRecord format. The TFRecord format
+consists of a set of sharded files where each entry is a serialized <code>tf.Example</code>
+proto. Each <code>tf.Example</code> proto contains the ImageNet image (JPEG encoded) as
+well as metadata such as label and bounding box information. See
+<a href="/tensorflow/models/blob/master/research/inception/inception/image_processing.py"><code>parse_example_proto</code></a> for details.</p>
+<p>We provide a single <a href="/tensorflow/models/blob/master/research/inception/inception/data/download_and_preprocess_imagenet.sh">script</a> for
+downloading and converting ImageNet data to TFRecord format. Downloading and
+preprocessing the data may take several hours (up to half a day) depending on
+your network and computer speed. Please be patient.</p>
+<p>To begin, you will need to sign up for an account with <a href="http://image-net.org" rel="nofollow">ImageNet</a> to gain access to the data. Look for the sign up page,
+create an account and request an access key to download the data.</p>
+<p>After you have <code>USERNAME</code> and <code>PASSWORD</code>, you are ready to run our script. Make
+sure that your hard disk has at least 500 GB of free space for downloading and
+storing the data. Here we select <code>DATA_DIR=$HOME/imagenet-data</code> as such a
+location but feel free to edit accordingly.</p>
+<p>When you run the below script, please enter <em>USERNAME</em> and <em>PASSWORD</em> when
+prompted. This will occur at the very beginning. Once these values are entered,
+you will not need to interact with the script again.</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> location of where to place the ImageNet data</span>
+DATA_DIR=<span class="pl-smi">$HOME</span>/imagenet-data
+
+<span class="pl-c"><span class="pl-c">#</span> build the preprocessing script.</span>
+<span class="pl-c1">cd</span> tensorflow-models/inception
+bazel build //inception:download_and_preprocess_imagenet
+
+<span class="pl-c"><span class="pl-c">#</span> run it</span>
+bazel-bin/inception/download_and_preprocess_imagenet <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${DATA_DIR}</span><span class="pl-pds">"</span></span></pre></div>
+<p>The final line of the output script should read:</p>
+<div class="highlight highlight-source-shell"><pre>2016-02-17 14:30:17.287989: Finished writing all 1281167 images <span class="pl-k">in</span> data set.</pre></div>
+<p>When the script finishes, you will find 1024 training files and 128 validation
+files in the <code>DATA_DIR</code>. The files will match the patterns
+<code>train-?????-of-01024</code> and <code>validation-?????-of-00128</code>, respectively.</p>
+<p><a href="https://www.youtube.com/watch?v=9bZkp7q19f0" rel="nofollow">Congratulations!</a> You are now
+ready to train or evaluate with the ImageNet data set.</p>
+<h2><a id="user-content-how-to-train-from-scratch" class="anchor" aria-hidden="true" href="#how-to-train-from-scratch"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to Train from Scratch</h2>
+<p><strong>WARNING</strong> Training an Inception v3 network from scratch is a computationally
+intensive task and depending on your compute setup may take several days or even
+weeks.</p>
+<p><em>Before proceeding</em> please read the <a href="https://www.tensorflow.org/tutorials/deep_cnn/index.html" rel="nofollow">Convolutional Neural Networks</a> tutorial; in
+particular, focus on <a href="https://www.tensorflow.org/tutorials/deep_cnn/index.html#launching_and_training_the_model_on_multiple_gpu_cards" rel="nofollow">Training a Model Using Multiple GPU Cards</a>. The model training method is nearly identical to that described in the
+CIFAR-10 multi-GPU model training. Briefly, the model training</p>
+<ul>
+<li>Places an individual model replica on each GPU.</li>
+<li>Splits the batch across the GPUs.</li>
+<li>Updates model parameters synchronously by waiting for all GPUs to finish
+processing a batch of data.</li>
+</ul>
+<p>The training procedure is encapsulated by this diagram of how operations and
+variables are placed on CPU and GPUs respectively.</p>
+<div>
+  <a target="_blank" rel="noopener noreferrer" href="https://camo.githubusercontent.com/dcd4523f5aa3d6a809a8a9dee960b5107e3f5732/68747470733a2f2f7777772e74656e736f72666c6f772e6f72672f696d616765732f506172616c6c656c69736d2e706e67"><img src="https://camo.githubusercontent.com/dcd4523f5aa3d6a809a8a9dee960b5107e3f5732/68747470733a2f2f7777772e74656e736f72666c6f772e6f72672f696d616765732f506172616c6c656c69736d2e706e67" data-canonical-src="https://www.tensorflow.org/images/Parallelism.png" style="max-width:100%;"></a>
+</div>
+<p>Each tower computes the gradients for a portion of the batch and the gradients
+are combined and averaged across the multiple towers in order to provide a
+single update of the Variables stored on the CPU.</p>
+<p>A crucial aspect of training a network of this size is <em>training speed</em> in terms
+of wall-clock time. The training speed is dictated by many factors -- most
+importantly the batch size and the learning rate schedule. Both of these
+parameters are heavily coupled to the hardware set up.</p>
+<p>Generally speaking, a batch size is a difficult parameter to tune as it requires
+balancing memory demands of the model, memory available on the GPU and speed of
+computation. Generally speaking, employing larger batch sizes leads to more
+efficient computation and potentially more efficient training steps.</p>
+<p>We have tested several hardware setups for training this model from scratch but
+we emphasize that depending your hardware set up, you may need to adapt the
+batch size and learning rate schedule.</p>
+<p>Please see the comments in <code>inception_train.py</code> for a few selected learning rate
+plans based on some selected hardware setups.</p>
+<p>To train this model, you simply need to specify the following:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Build the model. Note that we need to make sure the TensorFlow is ready to</span>
+<span class="pl-c"><span class="pl-c">#</span> use before this as this command will not build TensorFlow.</span>
+<span class="pl-c1">cd</span> tensorflow-models/inception
+bazel build //inception:imagenet_train
+
+<span class="pl-c"><span class="pl-c">#</span> run it</span>
+bazel-bin/inception/imagenet_train --num_gpus=1 --batch_size=32 --train_dir=/tmp/imagenet_train --data_dir=/tmp/imagenet_data</pre></div>
+<p>The model reads in the ImageNet training data from <code>--data_dir</code>. If you followed
+the instructions in <a href="#getting-started">Getting Started</a>, then set
+<code>--data_dir="${DATA_DIR}"</code>. The script assumes that there exists a set of
+sharded TFRecord files containing the ImageNet data. If you have not created
+TFRecord files, please refer to <a href="#getting-started">Getting Started</a></p>
+<p>Here is the output of the above command line when running on a Tesla K40c:</p>
+<div class="highlight highlight-source-shell"><pre>2016-03-07 12:24:59.922898: step 0, loss = 13.11 (5.3 examples/sec<span class="pl-k">;</span> 6.064 sec/batch)
+2016-03-07 12:25:55.206783: step 10, loss = 13.71 (9.4 examples/sec<span class="pl-k">;</span> 3.394 sec/batch)
+2016-03-07 12:26:28.905231: step 20, loss = 14.81 (9.5 examples/sec<span class="pl-k">;</span> 3.380 sec/batch)
+2016-03-07 12:27:02.699719: step 30, loss = 14.45 (9.5 examples/sec<span class="pl-k">;</span> 3.378 sec/batch)
+2016-03-07 12:27:36.515699: step 40, loss = 13.98 (9.5 examples/sec<span class="pl-k">;</span> 3.376 sec/batch)
+2016-03-07 12:28:10.220956: step 50, loss = 13.92 (9.6 examples/sec<span class="pl-k">;</span> 3.327 sec/batch)
+2016-03-07 12:28:43.658223: step 60, loss = 13.28 (9.6 examples/sec<span class="pl-k">;</span> 3.350 sec/batch)
+...</pre></div>
+<p>In this example, a log entry is printed every 10 step and the line includes the
+total loss (starts around 13.0-14.0) and the speed of processing in terms of
+throughput (examples / sec) and batch speed (sec/batch).</p>
+<p>The number of GPU devices is specified by <code>--num_gpus</code> (which defaults to 1).
+Specifying <code>--num_gpus</code> greater then 1 splits the batch evenly split across the
+GPU cards.</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Build the model. Note that we need to make sure the TensorFlow is ready to</span>
+<span class="pl-c"><span class="pl-c">#</span> use before this as this command will not build TensorFlow.</span>
+<span class="pl-c1">cd</span> tensorflow-models/inception
+bazel build //inception:imagenet_train
+
+<span class="pl-c"><span class="pl-c">#</span> run it</span>
+bazel-bin/inception/imagenet_train --num_gpus=2 --batch_size=64 --train_dir=/tmp/imagenet_train</pre></div>
+<p>This model splits the batch of 64 images across 2 GPUs and calculates the
+average gradient by waiting for both GPUs to finish calculating the gradients
+from their respective data (See diagram above). Generally speaking, using larger
+numbers of GPUs leads to higher throughput as well as the opportunity to use
+larger batch sizes. In turn, larger batch sizes imply better estimates of the
+gradient enabling the usage of higher learning rates. In summary, using more
+GPUs results in simply faster training speed.</p>
+<p>Note that selecting a batch size is a difficult parameter to tune as it requires
+balancing memory demands of the model, memory available on the GPU and speed of
+computation. Generally speaking, employing larger batch sizes leads to more
+efficient computation and potentially more efficient training steps.</p>
+<p>Note that there is considerable noise in the loss function on individual steps
+in the previous log. Because of this noise, it is difficult to discern how well
+a model is learning. The solution to the last problem is to launch TensorBoard
+pointing to the directory containing the events log.</p>
+<div class="highlight highlight-source-shell"><pre>tensorboard --logdir=/tmp/imagenet_train</pre></div>
+<p>TensorBoard has access to the many Summaries produced by the model that describe
+multitudes of statistics tracking the model behavior and the quality of the
+learned model. In particular, TensorBoard tracks a exponentially smoothed
+version of the loss. In practice, it is far easier to judge how well a model
+learns by monitoring the smoothed version of the loss.</p>
+<h2><a id="user-content-how-to-train-from-scratch-in-a-distributed-setting" class="anchor" aria-hidden="true" href="#how-to-train-from-scratch-in-a-distributed-setting"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to Train from Scratch in a Distributed Setting</h2>
+<p><strong>NOTE</strong> Distributed TensorFlow requires version 0.8 or later.</p>
+<p>Distributed TensorFlow lets us use multiple machines to train a model faster.
+This is quite different from the training with multiple GPU towers on a single
+machine where all parameters and gradients computation are in the same place. We
+coordinate the computation across multiple machines by employing a centralized
+repository for parameters that maintains a unified, single copy of model
+parameters. Each individual machine sends gradient updates to the centralized
+parameter repository which coordinates these updates and sends back updated
+parameters to the individual machines running the model training.</p>
+<p>We term each machine that runs a copy of the training a <code>worker</code> or <code>replica</code>.
+We term each machine that maintains model parameters a <code>ps</code>, short for
+<code>parameter server</code>. Note that we might have more than one machine acting as a
+<code>ps</code> as the model parameters may be sharded across multiple machines.</p>
+<p>Variables may be updated with synchronous or asynchronous gradient updates. One
+may construct a an <a href="https://www.tensorflow.org/api_docs/python/train.html#optimizers" rel="nofollow"><code>Optimizer</code></a> in TensorFlow
+that constructs the necessary graph for either case diagrammed below from the
+TensorFlow <a href="http://download.tensorflow.org/paper/whitepaper2015.pdf" rel="nofollow">Whitepaper</a>:</p>
+<div>
+  <a target="_blank" rel="noopener noreferrer" href="https://camo.githubusercontent.com/0b7a1232bd3f8861dfbccab568a30591588384dc/68747470733a2f2f7777772e74656e736f72666c6f772e6f72672f696d616765732f74656e736f72666c6f775f666967757265372e706e67"><img src="https://camo.githubusercontent.com/0b7a1232bd3f8861dfbccab568a30591588384dc/68747470733a2f2f7777772e74656e736f72666c6f772e6f72672f696d616765732f74656e736f72666c6f775f666967757265372e706e67" data-canonical-src="https://www.tensorflow.org/images/tensorflow_figure7.png" style="max-width:100%;"></a>
+</div>
+<p>In <a href="https://arxiv.org/abs/1604.00981" rel="nofollow">a recent paper</a>, synchronous gradient
+updates have demonstrated to reach higher accuracy in a shorter amount of time.
+In this distributed Inception example we employ synchronous gradient updates.</p>
+<p>Note that in this example each replica has a single tower that uses one GPU.</p>
+<p>The command-line flags <code>worker_hosts</code> and <code>ps_hosts</code> specify available servers.
+The same binary will be used for both the <code>worker</code> jobs and the <code>ps</code> jobs.
+Command line flag <code>job_name</code> will be used to specify what role a task will be
+playing and <code>task_id</code> will be used to identify which one of the jobs it is
+running. Several things to note here:</p>
+<ul>
+<li>The numbers of <code>ps</code> and <code>worker</code> tasks are inferred from the lists of hosts
+specified in the flags. The <code>task_id</code> should be within the range <code>[0, num_ps_tasks)</code> for <code>ps</code> tasks and <code>[0, num_worker_tasks)</code> for <code>worker</code>
+tasks.</li>
+<li><code>ps</code> and <code>worker</code> tasks can run on the same machine, as long as that machine
+has sufficient resources to handle both tasks. Note that the <code>ps</code> task does
+not benefit from a GPU, so it should not attempt to use one (see below).</li>
+<li>Multiple <code>worker</code> tasks can run on the same machine with multiple GPUs so
+machine_A with 2 GPUs may have 2 workers while machine_B with 1 GPU just has
+1 worker.</li>
+<li>The default learning rate schedule works well for a wide range of number of
+replicas [25, 50, 100] but feel free to tune it for even better results.</li>
+<li>The command line of both <code>ps</code> and <code>worker</code> tasks should include the complete
+list of <code>ps_hosts</code> and <code>worker_hosts</code>.</li>
+<li>There is a chief <code>worker</code> among all workers which defaults to <code>worker</code> 0.
+The chief will be in charge of initializing all the parameters, writing out
+the summaries and the checkpoint. The checkpoint and summary will be in the
+<code>train_dir</code> of the host for <code>worker</code> 0.</li>
+<li>Each worker processes a batch_size number of examples but each gradient
+update is computed from all replicas. Hence, the effective batch size of
+this model is batch_size * num_workers.</li>
+</ul>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Build the model. Note that we need to make sure the TensorFlow is ready to</span>
+<span class="pl-c"><span class="pl-c">#</span> use before this as this command will not build TensorFlow.</span>
+<span class="pl-c1">cd</span> tensorflow-models/inception
+bazel build //inception:imagenet_distributed_train
+
+<span class="pl-c"><span class="pl-c">#</span> To start worker 0, go to the worker0 host and run the following (Note that</span>
+<span class="pl-c"><span class="pl-c">#</span> task_id should be in the range [0, num_worker_tasks):</span>
+bazel-bin/inception/imagenet_distributed_train \
+--batch_size=32 \
+--data_dir=<span class="pl-smi">$HOME</span>/imagenet-data \
+--job_name=<span class="pl-s"><span class="pl-pds">'</span>worker<span class="pl-pds">'</span></span> \
+--task_id=0 \
+--ps_hosts=<span class="pl-s"><span class="pl-pds">'</span>ps0.example.com:2222<span class="pl-pds">'</span></span> \
+--worker_hosts=<span class="pl-s"><span class="pl-pds">'</span>worker0.example.com:2222,worker1.example.com:2222<span class="pl-pds">'</span></span>
+
+<span class="pl-c"><span class="pl-c">#</span> To start worker 1, go to the worker1 host and run the following (Note that</span>
+<span class="pl-c"><span class="pl-c">#</span> task_id should be in the range [0, num_worker_tasks):</span>
+bazel-bin/inception/imagenet_distributed_train \
+--batch_size=32 \
+--data_dir=<span class="pl-smi">$HOME</span>/imagenet-data \
+--job_name=<span class="pl-s"><span class="pl-pds">'</span>worker<span class="pl-pds">'</span></span> \
+--task_id=1 \
+--ps_hosts=<span class="pl-s"><span class="pl-pds">'</span>ps0.example.com:2222<span class="pl-pds">'</span></span> \
+--worker_hosts=<span class="pl-s"><span class="pl-pds">'</span>worker0.example.com:2222,worker1.example.com:2222<span class="pl-pds">'</span></span>
+
+<span class="pl-c"><span class="pl-c">#</span> To start the parameter server (ps), go to the ps host and run the following (Note</span>
+<span class="pl-c"><span class="pl-c">#</span> that task_id should be in the range [0, num_ps_tasks):</span>
+bazel-bin/inception/imagenet_distributed_train \
+--job_name=<span class="pl-s"><span class="pl-pds">'</span>ps<span class="pl-pds">'</span></span> \
+--task_id=0 \
+--ps_hosts=<span class="pl-s"><span class="pl-pds">'</span>ps0.example.com:2222<span class="pl-pds">'</span></span> \
+--worker_hosts=<span class="pl-s"><span class="pl-pds">'</span>worker0.example.com:2222,worker1.example.com:2222<span class="pl-pds">'</span></span></pre></div>
+<p>If you have installed a GPU-compatible version of TensorFlow, the <code>ps</code> will also
+try to allocate GPU memory although it is not helpful. This could potentially
+crash the worker on the same machine as it has little to no GPU memory to
+allocate. To avoid this, you can prepend the previous command to start <code>ps</code>
+with: <code>CUDA_VISIBLE_DEVICES=''</code></p>
+<div class="highlight highlight-source-shell"><pre>CUDA_VISIBLE_DEVICES=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> bazel-bin/inception/imagenet_distributed_train \
+--job_name=<span class="pl-s"><span class="pl-pds">'</span>ps<span class="pl-pds">'</span></span> \
+--task_id=0 \
+--ps_hosts=<span class="pl-s"><span class="pl-pds">'</span>ps0.example.com:2222<span class="pl-pds">'</span></span> \
+--worker_hosts=<span class="pl-s"><span class="pl-pds">'</span>worker0.example.com:2222,worker1.example.com:2222<span class="pl-pds">'</span></span></pre></div>
+<p>If you have run everything correctly, you should see a log in each <code>worker</code> job
+that looks like the following. Note the training speed varies depending on your
+hardware and the first several steps could take much longer.</p>
+<div class="highlight highlight-source-shell"><pre>INFO:tensorflow:PS hosts are: [<span class="pl-s"><span class="pl-pds">'</span>ps0.example.com:2222<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>ps1.example.com:2222<span class="pl-pds">'</span></span>]
+INFO:tensorflow:Worker hosts are: [<span class="pl-s"><span class="pl-pds">'</span>worker0.example.com:2222<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>worker1.example.com:2222<span class="pl-pds">'</span></span>]
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache <span class="pl-k">for</span> job ps -<span class="pl-k">&gt;</span> {ps0.example.com:2222, ps1.example.com:2222}
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache <span class="pl-k">for</span> job worker -<span class="pl-k">&gt;</span> {localhost:2222, worker1.example.com:2222}
+I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:202] Started server with target: grpc://localhost:2222
+INFO:tensorflow:Created variable global_step:0 with <span class="pl-en">shape</span> () and init <span class="pl-k">&lt;</span>function zeros_initializer at 0x7f6aa014b<span class="pl-k">140&gt;</span>
+
+...
+
+INFO:tensorflow:Created variable logits/logits/biases:0 with shape (1001,) and init <span class="pl-k">&lt;</span>function _initializer at 0x7f6a77f3cf<span class="pl-k">50&gt;</span>
+INFO:tensorflow:SyncReplicas enabled: replicas_to_aggregate=2<span class="pl-k">;</span> total_num_replicas=2
+INFO:tensorflow:2016-04-13 01:56:26.405639 Supervisor
+INFO:tensorflow:Started 2 queues <span class="pl-k">for</span> processing input data.
+INFO:tensorflow:global_step/sec: 0
+INFO:tensorflow:Worker 0: 2016-04-13 01:58:40.342404: step 0, loss = 12.97(0.0 examples/sec<span class="pl-k">;</span> 65.428  sec/batch)
+INFO:tensorflow:global_step/sec: 0.0172907
+...</pre></div>
+<p>and a log in each <code>ps</code> job that looks like the following:</p>
+<div class="highlight highlight-source-shell"><pre>INFO:tensorflow:PS hosts are: [<span class="pl-s"><span class="pl-pds">'</span>ps0.example.com:2222<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>ps1.example.com:2222<span class="pl-pds">'</span></span>]
+INFO:tensorflow:Worker hosts are: [<span class="pl-s"><span class="pl-pds">'</span>worker0.example.com:2222<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>worker1.example.com:2222<span class="pl-pds">'</span></span>]
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache <span class="pl-k">for</span> job ps -<span class="pl-k">&gt;</span> {localhost:2222, ps1.example.com:2222}
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache <span class="pl-k">for</span> job worker -<span class="pl-k">&gt;</span> {worker0.example.com:2222, worker1.example.com:2222}
+I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:202] Started server with target: grpc://localhost:2222</pre></div>
+<p>If you compiled TensorFlow (from v1.1-rc3) with VERBS support and you have the
+required device and IB verbs SW stack, you can specify --protocol='grpc+verbs'
+In order to use Verbs RDMA for Tensor passing between workers and ps.
+Need to add the the --protocol flag in all tasks (ps and workers).
+The default protocol is the TensorFlow default protocol of grpc.</p>
+<p><a href="https://www.youtube.com/watch?v=9bZkp7q19f0" rel="nofollow">Congratulations!</a> You are now
+training Inception in a distributed manner.</p>
+<h2><a id="user-content-how-to-evaluate" class="anchor" aria-hidden="true" href="#how-to-evaluate"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to Evaluate</h2>
+<p>Evaluating an Inception v3 model on the ImageNet 2012 validation data set
+requires running a separate binary.</p>
+<p>The evaluation procedure is nearly identical to <a href="https://www.tensorflow.org/tutorials/deep_cnn/index.html#evaluating_a_model" rel="nofollow">Evaluating a Model</a>
+described in the <a href="https://www.tensorflow.org/tutorials/deep_cnn/index.html" rel="nofollow">Convolutional Neural Network</a> tutorial.</p>
+<p><strong>WARNING</strong> Be careful not to run the evaluation and training binary on the same
+GPU or else you might run out of memory. Consider running the evaluation on a
+separate GPU if available or suspending the training binary while running the
+evaluation on the same GPU.</p>
+<p>Briefly, one can evaluate the model by running:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Build the model. Note that we need to make sure the TensorFlow is ready to</span>
+<span class="pl-c"><span class="pl-c">#</span> use before this as this command will not build TensorFlow.</span>
+<span class="pl-c1">cd</span> tensorflow-models/inception
+bazel build //inception:imagenet_eval
+
+<span class="pl-c"><span class="pl-c">#</span> run it</span>
+bazel-bin/inception/imagenet_eval --checkpoint_dir=/tmp/imagenet_train --eval_dir=/tmp/imagenet_eval</pre></div>
+<p>Note that we point <code>--checkpoint_dir</code> to the location of the checkpoints saved
+by <code>inception_train.py</code> above. Running the above command results in the
+following output:</p>
+<div class="highlight highlight-source-shell"><pre>2016-02-17 22:32:50.391206: precision @ 1 = 0.735
+...</pre></div>
+<p>The script calculates the precision @ 1 over the entire validation data
+periodically. The precision @ 1 measures the how often the highest scoring
+prediction from the model matched the ImageNet label -- in this case, 73.5%. If
+you wish to run the eval just once and not periodically, append the <code>--run_once</code>
+option.</p>
+<p>Much like the training script, <code>imagenet_eval.py</code> also exports summaries that
+may be visualized in TensorBoard. These summaries calculate additional
+statistics on the predictions (e.g. recall @ 5) as well as monitor the
+statistics of the model activations and weights during evaluation.</p>
+<h2><a id="user-content-how-to-fine-tune-a-pre-trained-model-on-a-new-task" class="anchor" aria-hidden="true" href="#how-to-fine-tune-a-pre-trained-model-on-a-new-task"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to Fine-Tune a Pre-Trained Model on a New Task</h2>
+<h3><a id="user-content-getting-started-1" class="anchor" aria-hidden="true" href="#getting-started-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting Started</h3>
+<p>Much like training the ImageNet model we must first convert a new data set to
+the sharded TFRecord format which each entry is a serialized <code>tf.Example</code> proto.</p>
+<p>We have provided a script demonstrating how to do this for small data set of of
+a few thousand flower images spread across 5 labels:</p>
+<div class="highlight highlight-source-shell"><pre>daisy, dandelion, roses, sunflowers, tulips</pre></div>
+<p>There is a single automated script that downloads the data set and converts it
+to the TFRecord format. Much like the ImageNet data set, each record in the
+TFRecord format is a serialized <code>tf.Example</code> proto whose entries include a
+JPEG-encoded string and an integer label. Please see <a href="/tensorflow/models/blob/master/research/inception/inception/image_processing.py"><code>parse_example_proto</code></a> for details.</p>
+<p>The script just takes a few minutes to run depending your network connection
+speed for downloading and processing the images. Your hard disk requires 200MB
+of free storage. Here we select <code>DATA_DIR=/tmp/flowers-data/</code> as such a location
+but feel free to edit accordingly.</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> location of where to place the flowers data</span>
+FLOWERS_DATA_DIR=/tmp/flowers-data/
+
+<span class="pl-c"><span class="pl-c">#</span> build the preprocessing script.</span>
+<span class="pl-c1">cd</span> tensorflow-models/inception
+bazel build //inception:download_and_preprocess_flowers
+
+<span class="pl-c"><span class="pl-c">#</span> run it</span>
+bazel-bin/inception/download_and_preprocess_flowers <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${FLOWERS_DATA_DIR}</span><span class="pl-pds">"</span></span></pre></div>
+<p>If the script runs successfully, the final line of the terminal output should
+look like:</p>
+<div class="highlight highlight-source-shell"><pre>2016-02-24 20:42:25.067551: Finished writing all 3170 images <span class="pl-k">in</span> data set.</pre></div>
+<p>When the script finishes you will find 2 shards for the training and validation
+files in the <code>DATA_DIR</code>. The files will match the patterns <code>train-?????-of-00002</code>
+and <code>validation-?????-of-00002</code>, respectively.</p>
+<p><strong>NOTE</strong> If you wish to prepare a custom image data set for transfer learning,
+you will need to invoke <a href="/tensorflow/models/blob/master/research/inception/inception/data/build_image_data.py"><code>build_image_data.py</code></a> on
+your custom data set. Please see the associated options and assumptions behind
+this script by reading the comments section of <a href="/tensorflow/models/blob/master/research/inception/inception/data/build_image_data.py"><code>build_image_data.py</code></a>. Also, if your custom data has a different
+number of examples or classes, you need to change the appropriate values in
+<a href="/tensorflow/models/blob/master/research/inception/inception/imagenet_data.py"><code>imagenet_data.py</code></a>.</p>
+<p>The second piece you will need is a trained Inception v3 image model. You have
+the option of either training one yourself (See <a href="#how-to-train-from-scratch">How to Train from Scratch</a> for details) or you can download a pre-trained
+model like so:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> location of where to place the Inception v3 model</span>
+INCEPTION_MODEL_DIR=<span class="pl-smi">$HOME</span>/inception-v3-model
+mkdir -p <span class="pl-smi">${INCEPTION_MODEL_DIR}</span>
+<span class="pl-c1">cd</span> <span class="pl-smi">${INCEPTION_MODEL_DIR}</span>
+
+<span class="pl-c"><span class="pl-c">#</span> download the Inception v3 model</span>
+curl -O http://download.tensorflow.org/models/image/imagenet/inception-v3-2016-03-01.tar.gz
+tar xzf inception-v3-2016-03-01.tar.gz
+
+<span class="pl-c"><span class="pl-c">#</span> this will create a directory called inception-v3 which contains the following files.</span>
+<span class="pl-k">&gt;</span> ls inception-v3
+README.txt
+checkpoint
+model.ckpt-157585</pre></div>
+<p><a href="https://www.youtube.com/watch?v=9bZkp7q19f0" rel="nofollow">Congratulations!</a> You are now
+ready to fine-tune your pre-trained Inception v3 model with the flower data set.</p>
+<h3><a id="user-content-how-to-retrain-a-trained-model-on-the-flowers-data" class="anchor" aria-hidden="true" href="#how-to-retrain-a-trained-model-on-the-flowers-data"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to Retrain a Trained Model on the Flowers Data</h3>
+<p>We are now ready to fine-tune a pre-trained Inception-v3 model on the flowers
+data set. This requires two distinct changes to our training procedure:</p>
+<ol>
+<li>
+<p>Build the exact same model as previously except we change the number of
+labels in the final classification layer.</p>
+</li>
+<li>
+<p>Restore all weights from the pre-trained Inception-v3 except for the final
+classification layer; this will get randomly initialized instead.</p>
+</li>
+</ol>
+<p>We can perform these two operations by specifying two flags:
+<code>--pretrained_model_checkpoint_path</code> and <code>--fine_tune</code>. The first flag is a
+string that points to the path of a pre-trained Inception-v3 model. If this flag
+is specified, it will load the entire model from the checkpoint before the
+script begins training.</p>
+<p>The second flag <code>--fine_tune</code> is a boolean that indicates whether the last
+classification layer should be randomly initialized or restored. You may set
+this flag to false if you wish to continue training a pre-trained model from a
+checkpoint. If you set this flag to true, you can train a new classification
+layer from scratch.</p>
+<p>In order to understand how <code>--fine_tune</code> works, please see the discussion on
+<code>Variables</code> in the TensorFlow-Slim <a href="/tensorflow/models/blob/master/research/inception/inception/slim/README.md"><code>README.md</code></a>.</p>
+<p>Putting this all together you can retrain a pre-trained Inception-v3 model on
+the flowers data set with the following command.</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Build the model. Note that we need to make sure the TensorFlow is ready to</span>
+<span class="pl-c"><span class="pl-c">#</span> use before this as this command will not build TensorFlow.</span>
+<span class="pl-c1">cd</span> tensorflow-models/inception
+bazel build //inception:flowers_train
+
+<span class="pl-c"><span class="pl-c">#</span> Path to the downloaded Inception-v3 model.</span>
+MODEL_PATH=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${INCEPTION_MODEL_DIR}</span>/inception-v3/model.ckpt-157585<span class="pl-pds">"</span></span>
+
+<span class="pl-c"><span class="pl-c">#</span> Directory where the flowers data resides.</span>
+FLOWERS_DATA_DIR=/tmp/flowers-data/
+
+<span class="pl-c"><span class="pl-c">#</span> Directory where to save the checkpoint and events files.</span>
+TRAIN_DIR=/tmp/flowers_train/
+
+<span class="pl-c"><span class="pl-c">#</span> Run the fine-tuning on the flowers data set starting from the pre-trained</span>
+<span class="pl-c"><span class="pl-c">#</span> Imagenet-v3 model.</span>
+bazel-bin/inception/flowers_train \
+  --train_dir=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${TRAIN_DIR}</span><span class="pl-pds">"</span></span> \
+  --data_dir=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${FLOWERS_DATA_DIR}</span><span class="pl-pds">"</span></span> \
+  --pretrained_model_checkpoint_path=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${MODEL_PATH}</span><span class="pl-pds">"</span></span> \
+  --fine_tune=True \
+  --initial_learning_rate=0.001 \
+  --input_queue_memory_factor=1</pre></div>
+<p>We have added a few extra options to the training procedure.</p>
+<ul>
+<li>Fine-tuning a model a separate data set requires significantly lowering the
+initial learning rate. We set the initial learning rate to 0.001.</li>
+<li>The flowers data set is quite small so we shrink the size of the shuffling
+queue of examples. See <a href="#adjusting-memory-demands">Adjusting Memory Demands</a>
+for more details.</li>
+</ul>
+<p>The training script will only reports the loss. To evaluate the quality of the
+fine-tuned model, you will need to run <code>flowers_eval</code>:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Build the model. Note that we need to make sure the TensorFlow is ready to</span>
+<span class="pl-c"><span class="pl-c">#</span> use before this as this command will not build TensorFlow.</span>
+<span class="pl-c1">cd</span> tensorflow-models/inception
+bazel build //inception:flowers_eval
+
+<span class="pl-c"><span class="pl-c">#</span> Directory where we saved the fine-tuned checkpoint and events files.</span>
+TRAIN_DIR=/tmp/flowers_train/
+
+<span class="pl-c"><span class="pl-c">#</span> Directory where the flowers data resides.</span>
+FLOWERS_DATA_DIR=/tmp/flowers-data/
+
+<span class="pl-c"><span class="pl-c">#</span> Directory where to save the evaluation events files.</span>
+EVAL_DIR=/tmp/flowers_eval/
+
+<span class="pl-c"><span class="pl-c">#</span> Evaluate the fine-tuned model on a hold-out of the flower data set.</span>
+bazel-bin/inception/flowers_eval \
+  --eval_dir=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${EVAL_DIR}</span><span class="pl-pds">"</span></span> \
+  --data_dir=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${FLOWERS_DATA_DIR}</span><span class="pl-pds">"</span></span> \
+  --subset=validation \
+  --num_examples=500 \
+  --checkpoint_dir=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${TRAIN_DIR}</span><span class="pl-pds">"</span></span> \
+  --input_queue_memory_factor=1 \
+  --run_once</pre></div>
+<p>We find that the evaluation arrives at roughly 93.4% precision@1 after the model
+has been running for 2000 steps.</p>
+<div class="highlight highlight-source-shell"><pre>Successfully loaded model from /tmp/flowers/model.ckpt-1999 at step=1999.
+2016-03-01 16:52:51.761219: starting evaluation on (validation).
+2016-03-01 16:53:05.450419: [20 batches out of 20] (36.5 examples/sec<span class="pl-k">;</span> 0.684sec/batch)
+2016-03-01 16:53:05.450471: precision @ 1 = 0.9340 recall @ 5 = 0.9960 [500 examples]</pre></div>
+<h2><a id="user-content-how-to-construct-a-new-dataset-for-retraining" class="anchor" aria-hidden="true" href="#how-to-construct-a-new-dataset-for-retraining"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to Construct a New Dataset for Retraining</h2>
+<p>One can use the existing scripts supplied with this model to build a new dataset
+for training or fine-tuning. The main script to employ is
+<a href="/tensorflow/models/blob/master/research/inception/inception/data/build_image_data.py"><code>build_image_data.py</code></a>. Briefly, this script takes a
+structured directory of images and converts it to a sharded <code>TFRecord</code> that can
+be read by the Inception model.</p>
+<p>In particular, you will need to create a directory of training images that
+reside within <code>$TRAIN_DIR</code> and <code>$VALIDATION_DIR</code> arranged as such:</p>
+<div class="highlight highlight-source-shell"><pre>  <span class="pl-smi">$TRAIN_DIR</span>/dog/image0.jpeg
+  <span class="pl-smi">$TRAIN_DIR</span>/dog/image1.jpg
+  <span class="pl-smi">$TRAIN_DIR</span>/dog/image2.png
+  ...
+  <span class="pl-smi">$TRAIN_DIR</span>/cat/weird-image.jpeg
+  <span class="pl-smi">$TRAIN_DIR</span>/cat/my-image.jpeg
+  <span class="pl-smi">$TRAIN_DIR</span>/cat/my-image.JPG
+  ...
+  <span class="pl-smi">$VALIDATION_DIR</span>/dog/imageA.jpeg
+  <span class="pl-smi">$VALIDATION_DIR</span>/dog/imageB.jpg
+  <span class="pl-smi">$VALIDATION_DIR</span>/dog/imageC.png
+  ...
+  <span class="pl-smi">$VALIDATION_DIR</span>/cat/weird-image.PNG
+  <span class="pl-smi">$VALIDATION_DIR</span>/cat/that-image.jpg
+  <span class="pl-smi">$VALIDATION_DIR</span>/cat/cat.JPG
+  ...</pre></div>
+<p><strong>NOTE</strong>: This script will append an extra background class indexed at 0, so
+your class labels will range from 0 to num_labels. Using the example above, the
+corresponding class labels generated from <code>build_image_data.py</code> will be as
+follows:</p>
+<div class="highlight highlight-source-shell"><pre>0
+1 dog
+2 cat</pre></div>
+<p>Each sub-directory in <code>$TRAIN_DIR</code> and <code>$VALIDATION_DIR</code> corresponds to a unique
+label for the images that reside within that sub-directory. The images may be
+JPEG or PNG images. We do not support other images types currently.</p>
+<p>Once the data is arranged in this directory structure, we can run
+<code>build_image_data.py</code> on the data to generate the sharded <code>TFRecord</code> dataset.
+Each entry of the <code>TFRecord</code> is a serialized <code>tf.Example</code> protocol buffer. A
+complete list of information contained in the <code>tf.Example</code> is described in the
+comments of <code>build_image_data.py</code>.</p>
+<p>To run <code>build_image_data.py</code>, you can run the following command line:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> location to where to save the TFRecord data.</span>
+OUTPUT_DIRECTORY=<span class="pl-smi">$HOME</span>/my-custom-data/
+
+<span class="pl-c"><span class="pl-c">#</span> build the preprocessing script.</span>
+<span class="pl-c1">cd</span> tensorflow-models/inception
+bazel build //inception:build_image_data
+
+<span class="pl-c"><span class="pl-c">#</span> convert the data.</span>
+bazel-bin/inception/build_image_data \
+  --train_directory=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${TRAIN_DIR}</span><span class="pl-pds">"</span></span> \
+  --validation_directory=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${VALIDATION_DIR}</span><span class="pl-pds">"</span></span> \
+  --output_directory=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${OUTPUT_DIRECTORY}</span><span class="pl-pds">"</span></span> \
+  --labels_file=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${LABELS_FILE}</span><span class="pl-pds">"</span></span> \
+  --train_shards=128 \
+  --validation_shards=24 \
+  --num_threads=8</pre></div>
+<p>where the <code>$OUTPUT_DIRECTORY</code> is the location of the sharded <code>TFRecords</code>. The
+<code>$LABELS_FILE</code> will be a text file that is read by the script that provides
+a list of all of the labels. For instance, in the case flowers data set, the
+<code>$LABELS_FILE</code> contained the following data:</p>
+<div class="highlight highlight-source-shell"><pre>daisy
+dandelion
+roses
+sunflowers
+tulips</pre></div>
+<p>Note that each row of each label corresponds with the entry in the final
+classifier in the model. That is, the <code>daisy</code> corresponds to the classifier for
+entry <code>1</code>; <code>dandelion</code> is entry <code>2</code>, etc. We skip label <code>0</code> as a background
+class.</p>
+<p>After running this script produces files that look like the following:</p>
+<div class="highlight highlight-source-shell"><pre>  <span class="pl-smi">$TRAIN_DIR</span>/train-00000-of-00128
+  <span class="pl-smi">$TRAIN_DIR</span>/train-00001-of-00128
+  ...
+  <span class="pl-smi">$TRAIN_DIR</span>/train-00127-of-00128
+
+and
+
+  <span class="pl-smi">$VALIDATION_DIR</span>/validation-00000-of-00024
+  <span class="pl-smi">$VALIDATION_DIR</span>/validation-00001-of-00024
+  ...
+  <span class="pl-smi">$VALIDATION_DIR</span>/validation-00023-of-00024</pre></div>
+<p>where 128 and 24 are the number of shards specified for each dataset,
+respectively. Generally speaking, we aim for selecting the number of shards such
+that roughly 1024 images reside in each shard. Once this data set is built, you
+are ready to train or fine-tune an Inception model on this data set.</p>
+<p>Note, if you are piggy backing on the flowers retraining scripts, be sure to
+update <code>num_classes()</code> and <code>num_examples_per_epoch()</code> in <code>flowers_data.py</code>
+to correspond with your data.</p>
+<h2><a id="user-content-practical-considerations-for-training-a-model" class="anchor" aria-hidden="true" href="#practical-considerations-for-training-a-model"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Practical Considerations for Training a Model</h2>
+<p>The model architecture and training procedure is heavily dependent on the
+hardware used to train the model. If you wish to train or fine-tune this model
+on your machine <strong>you will need to adjust and empirically determine a good set
+of training hyper-parameters for your setup</strong>. What follows are some general
+considerations for novices.</p>
+<h3><a id="user-content-finding-good-hyperparameters" class="anchor" aria-hidden="true" href="#finding-good-hyperparameters"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Finding Good Hyperparameters</h3>
+<p>Roughly 5-10 hyper-parameters govern the speed at which a network is trained. In
+addition to <code>--batch_size</code> and <code>--num_gpus</code>, there are several constants defined
+in <a href="/tensorflow/models/blob/master/research/inception/inception/inception_train.py">inception_train.py</a> which dictate the learning
+schedule.</p>
+<div class="highlight highlight-source-shell"><pre>RMSPROP_DECAY = 0.9                <span class="pl-c"><span class="pl-c">#</span> Decay term for RMSProp.</span>
+MOMENTUM = 0.9                     <span class="pl-c"><span class="pl-c">#</span> Momentum in RMSProp.</span>
+RMSPROP_EPSILON = 1.0              <span class="pl-c"><span class="pl-c">#</span> Epsilon term for RMSProp.</span>
+INITIAL_LEARNING_RATE = 0.1        <span class="pl-c"><span class="pl-c">#</span> Initial learning rate.</span>
+NUM_EPOCHS_PER_DECAY = 30.0        <span class="pl-c"><span class="pl-c">#</span> Epochs after which learning rate decays.</span>
+LEARNING_RATE_DECAY_FACTOR = 0.16  <span class="pl-c"><span class="pl-c">#</span> Learning rate decay factor.</span></pre></div>
+<p>There are many papers that discuss the various tricks and trade-offs associated
+with training a model with stochastic gradient descent. For those new to the
+field, some great references are:</p>
+<ul>
+<li>Y Bengio, <a href="http://arxiv.org/abs/1206.5533" rel="nofollow">Practical recommendations for gradient-based training of deep
+architectures</a></li>
+<li>I Goodfellow, Y Bengio and A Courville, [Deep Learning]
+(<a href="http://www.deeplearningbook.org/" rel="nofollow">http://www.deeplearningbook.org/</a>)</li>
+</ul>
+<p>What follows is a summary of some general advice for identifying appropriate
+model hyper-parameters in the context of this particular model training setup.
+Namely, this library provides <em>synchronous</em> updates to model parameters based on
+batch-splitting the model across multiple GPUs.</p>
+<ul>
+<li>
+<p>Higher learning rates leads to faster training. Too high of learning rate
+leads to instability and will cause model parameters to diverge to infinity
+or NaN.</p>
+</li>
+<li>
+<p>Larger batch sizes lead to higher quality estimates of the gradient and
+permit training the model with higher learning rates.</p>
+</li>
+<li>
+<p>Often the GPU memory is a bottleneck that prevents employing larger batch
+sizes. Employing more GPUs allows one to use larger batch sizes because
+this model splits the batch across the GPUs.</p>
+</li>
+</ul>
+<p><strong>NOTE</strong> If one wishes to train this model with <em>asynchronous</em> gradient updates,
+one will need to substantially alter this model and new considerations need to
+be factored into hyperparameter tuning. See <a href="http://research.google.com/archive/large_deep_networks_nips2012.html" rel="nofollow">Large Scale Distributed Deep
+Networks</a>
+for a discussion in this domain.</p>
+<h3><a id="user-content-adjusting-memory-demands" class="anchor" aria-hidden="true" href="#adjusting-memory-demands"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Adjusting Memory Demands</h3>
+<p>Training this model has large memory demands in terms of the CPU and GPU. Let's
+discuss each item in turn.</p>
+<p>GPU memory is relatively small compared to CPU memory. Two items dictate the
+amount of GPU memory employed -- model architecture and batch size. Assuming
+that you keep the model architecture fixed, the sole parameter governing the GPU
+demand is the batch size. A good rule of thumb is to try employ as large of
+batch size as will fit on the GPU.</p>
+<p>If you run out of GPU memory, either lower the <code>--batch_size</code> or employ more
+GPUs on your desktop. The model performs batch-splitting across GPUs, thus N
+GPUs can handle N times the batch size of 1 GPU.</p>
+<p>The model requires a large amount of CPU memory as well. We have tuned the model
+to employ about ~20GB of CPU memory. Thus, having access to about 40 GB of CPU
+memory would be ideal.</p>
+<p>If that is not possible, you can tune down the memory demands of the model via
+lowering <code>--input_queue_memory_factor</code>. Images are preprocessed asynchronously
+with respect to the main training across <code>--num_preprocess_threads</code> threads. The
+preprocessed images are stored in shuffling queue in which each GPU performs a
+dequeue operation in order to receive a <code>batch_size</code> worth of images.</p>
+<p>In order to guarantee good shuffling across the data, we maintain a large
+shuffling queue of 1024 x <code>input_queue_memory_factor</code> images. For the current
+model architecture, this corresponds to about 4GB of CPU memory. You may lower
+<code>input_queue_memory_factor</code> in order to decrease the memory footprint. Keep in
+mind though that lowering this value drastically may result in a model with
+slightly lower predictive accuracy when training from scratch. Please see
+comments in <a href="/tensorflow/models/blob/master/research/inception/inception/image_processing.py"><code>image_processing.py</code></a> for more details.</p>
+<h2><a id="user-content-troubleshooting" class="anchor" aria-hidden="true" href="#troubleshooting"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Troubleshooting</h2>
+<h4><a id="user-content-the-model-runs-out-of-cpu-memory" class="anchor" aria-hidden="true" href="#the-model-runs-out-of-cpu-memory"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The model runs out of CPU memory.</h4>
+<p>In lieu of buying more CPU memory, an easy fix is to decrease
+<code>--input_queue_memory_factor</code>. See <a href="#adjusting-memory-demands">Adjusting Memory Demands</a>.</p>
+<h4><a id="user-content-the-model-runs-out-of-gpu-memory" class="anchor" aria-hidden="true" href="#the-model-runs-out-of-gpu-memory"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The model runs out of GPU memory.</h4>
+<p>The data is not able to fit on the GPU card. The simplest solution is to
+decrease the batch size of the model. Otherwise, you will need to think about a
+more sophisticated method for specifying the training which cuts up the model
+across multiple <code>session.run()</code> calls or partitions the model across multiple
+GPUs. See <a href="https://www.tensorflow.org/how_tos/using_gpu/index.html" rel="nofollow">Using GPUs</a>
+and <a href="#adjusting-memory-demands">Adjusting Memory Demands</a> for more information.</p>
+<h4><a id="user-content-the-model-training-results-in-nans" class="anchor" aria-hidden="true" href="#the-model-training-results-in-nans"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The model training results in NaN's.</h4>
+<p>The learning rate of the model is too high. Turn down your learning rate.</p>
+<h4><a id="user-content-i-wish-to-train-a-model-with-a-different-image-size" class="anchor" aria-hidden="true" href="#i-wish-to-train-a-model-with-a-different-image-size"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>I wish to train a model with a different image size.</h4>
+<p>The simplest solution is to artificially resize your images to <code>299x299</code> pixels.
+See <a href="https://www.tensorflow.org/api_docs/python/image.html" rel="nofollow">Images</a> section for
+many resizing, cropping and padding methods. Note that the entire model
+architecture is predicated on a <code>299x299</code> image, thus if you wish to change the
+input image size, then you may need to redesign the entire model architecture.</p>
+<h4><a id="user-content-what-hardware-specification-are-these-hyper-parameters-targeted-for" class="anchor" aria-hidden="true" href="#what-hardware-specification-are-these-hyper-parameters-targeted-for"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What hardware specification are these hyper-parameters targeted for?</h4>
+<p>We targeted a desktop with 128GB of CPU ram connected to 8 NVIDIA Tesla K40 GPU
+cards but we have run this on desktops with 32GB of CPU ram and 1 NVIDIA Tesla
+K40. You can get a sense of the various training configurations we tested by
+reading the comments in <a href="/tensorflow/models/blob/master/research/inception/inception/inception_train.py"><code>inception_train.py</code></a>.</p>
+<h4><a id="user-content-how-do-i-continue-training-from-a-checkpoint-in-distributed-setting" class="anchor" aria-hidden="true" href="#how-do-i-continue-training-from-a-checkpoint-in-distributed-setting"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How do I continue training from a checkpoint in distributed setting?</h4>
+<p>You only need to make sure that the checkpoint is in a location that can be
+reached by all of the <code>ps</code> tasks. By specifying the checkpoint location with
+<code>--train_dir</code> , the <code>ps</code> servers will load the checkpoint before commencing
+training.</p>
+</article>
+      </div>
+  </div>
+
+
+  </div>
+  <div class="modal-backdrop js-touch-events"></div>
+</div>
+
+    </div>
+  </div>
+
+  </div>
+
+        
+<div class="footer container-lg px-3" role="contentinfo">
+  <div class="position-relative d-flex flex-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <ul class="list-style-none d-flex flex-wrap ">
+      <li class="mr-3">&copy; 2018 <span title="0.16193s from unicorn-8554494945-bh5b6">GitHub</span>, Inc.</li>
+        <li class="mr-3"><a data-ga-click="Footer, go to terms, text:terms" href="https://github.com/site/terms">Terms</a></li>
+        <li class="mr-3"><a data-ga-click="Footer, go to privacy, text:privacy" href="https://github.com/site/privacy">Privacy</a></li>
+        <li class="mr-3"><a href="https://help.github.com/articles/github-security/" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li class="mr-3"><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+        <li><a data-ga-click="Footer, go to help, text:help" href="https://help.github.com">Help</a></li>
+    </ul>
+
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon mr-lg-4" href="https://github.com">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+</a>
+   <ul class="list-style-none d-flex flex-wrap ">
+        <li class="mr-3"><a data-ga-click="Footer, go to contact, text:contact" href="https://github.com/contact">Contact GitHub</a></li>
+        <li class="mr-3"><a href="https://github.com/pricing" data-ga-click="Footer, go to Pricing, text:Pricing">Pricing</a></li>
+      <li class="mr-3"><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li class="mr-3"><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
+        <li class="mr-3"><a href="https://blog.github.com" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a data-ga-click="Footer, go to about, text:about" href="https://github.com/about">About</a></li>
+
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+
+
+  <div id="ajax-error-message" class="ajax-error-message flash flash-error">
+    <svg class="octicon octicon-alert" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"/></svg>
+    <button type="button" class="flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+      <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>
+    </button>
+    You can’t perform that action at this time.
+  </div>
+
+
+    <script crossorigin="anonymous" integrity="sha512-j7Lp68DTtqvVwQRYy65q4mJc9JP1A35BvECwKzSCU7QpZ1J1DAf7P6BdBSsUB4ZojLDiTKY24SIgwLRVbh0Lcw==" type="application/javascript" src="https://assets-cdn.github.com/assets/compat-19cf70acdf48671b75ef2a0d85aea5a3.js"></script>
+    <script crossorigin="anonymous" integrity="sha512-p2/ueuhbNfQoaYezcnkvHrHpE/jCmSYxxFzEYRWblxmKz8UBjciCHw6sbFwssAk1s9pET7sudnh22TWc+KHchw==" type="application/javascript" src="https://assets-cdn.github.com/assets/frameworks-e70e8e933b084eda34705c2ab5bb28d2.js"></script>
+    
+    <script crossorigin="anonymous" async="async" integrity="sha512-Mowufzm7yJfq867xo/UnMpoc7hzvRcqVbxqwf1Vh8j80GsQ8OP1xJgLdrg6WB445PUqNbfWHEwDzhwMpr9iVvA==" type="application/javascript" src="https://assets-cdn.github.com/assets/github-b6520c1c55fa2bd8dafd964545107434.js"></script>
+    
+    
+    
+  <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner d-none">
+    <svg class="octicon octicon-alert" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"/></svg>
+    <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
+    <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
+  </div>
+  <div class="facebox" id="facebox" style="display:none;">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+    </div>
+    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+      <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>
+    </button>
+  </div>
+</div>
+
+  <template id="site-details-dialog">
+  <details class="details-reset details-overlay details-overlay-dark lh-default text-gray-dark" open>
+    <summary aria-haspopup="dialog" aria-label="Close dialog"></summary>
+    <details-dialog class="Box Box--overlay d-flex flex-column anim-fade-in fast">
+      <button class="Box-btn-octicon m-0 btn-octicon position-absolute right-0 top-0" type="button" aria-label="Close dialog" data-close-dialog>
+        <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"/></svg>
+      </button>
+      <div class="octocat-spinner my-6 js-details-dialog-spinner"></div>
+    </details-dialog>
+  </details>
+</template>
+
+  <div class="Popover js-hovercard-content position-absolute" style="display: none; outline: none;" tabindex="0">
+  <div class="Popover-message Popover-message--bottom-left Popover-message--large Box box-shadow-large" style="width:360px;">
+  </div>
+</div>
+
+<div id="hovercard-aria-description" class="sr-only">
+  Press h to open a hovercard with more details.
+</div>
+
+
+  </body>
+</html>
+
