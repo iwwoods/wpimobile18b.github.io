@@ -128,12 +128,15 @@ Interpreter tflite = new Interpreter(tfliteModel);
 </aside>
 <h3>Converting the bitmap to a ByteBuffer</h3>
 <p>The first step is to create a Direct ByteBuffer.  We should have this be a global variable and only allocate this once or else we lose many of its advantages.  Therefore, in your <code>onCreate(...)</code> function you want to allocate it similar to below:</p>
-<pre><code>imgData = ByteBuffer.allocateDirect(
+<pre><code>
+imgData = ByteBuffer.allocateDirect(
                         DIM_BATCH_SIZE
                                 * SIZE_X
                                 * SIZE_Y
                                 * DIM_PIXEL_SIZE
                                 * NUM_BYTES_PER_CHANNEL);
+imgBuffer.order(ByteOrder.nativeOrder());
+                                
 </code></pre>
 <p>Let&#39;s quickly walk through what these variables are.</p>
 <ul>
@@ -142,6 +145,7 @@ Interpreter tflite = new Interpreter(tfliteModel);
 <li><em>DIM_PIXEL_SIZE</em> is how many channels there are per pixel, which in our case is 3</li>
 <li><em>NUM_BYTES_PER_CHANNEL</em> is how many bytes each pixel is stored as in our bitmap.  Since we&#39;ll be using a float based bitmap this is 4.</li>
 </ul>
+<p>(Manually settings the byte ordering fixes issues on windows)</p>
 <p>Okay, so now that our ByteBuffer is allocated let&#39;s read some data into it!<br>We do this pixel by pixel.  I&#39;m giving you the code to do so below to ensure that the order is correct as it could be a hassle.<br>One extra function is also included, <code>addPixelValue(...)</code>.  This function is meant to do some pre-processining on the input image to ensure the average and standard deviation of brightness are similar to how the model was trained.  If nothing else, deep learning is fincky.  For InceptionV3 IMAGE_MEAN = 128 and IMAGE_STD = 128.0.</p>
 <pre><code>private void convertBitmapToByteBuffer(Bitmap bitmap) {
     int[] intValues = new int[SIZE_X * SIZE_Y];
